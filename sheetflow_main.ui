@@ -20,7 +20,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -31,7 +31,7 @@
     <addaction name="file_open_action"/>
     <addaction name="file_save_action"/>
     <addaction name="fiel_other_action"/>
-    <addaction name="printf_action"/>
+    <addaction name="action_print"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
@@ -43,8 +43,8 @@
     <property name="title">
      <string>编辑</string>
     </property>
-    <addaction name="zoom_in_action"/>
-    <addaction name="zoom_out_action"/>
+    <addaction name="action_zoom_in"/>
+    <addaction name="action_zoom_out"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
@@ -107,10 +107,7 @@
     <string>另存为</string>
    </property>
   </action>
-  <action name="printf_action">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
+  <action name="action_print">
    <property name="icon">
     <iconset>
      <normaloff>image/project.png</normaloff>image/project.png</iconset>
@@ -122,7 +119,7 @@
     <string>打印</string>
    </property>
   </action>
-  <action name="zoom_in_action">
+  <action name="action_zoom_in">
    <property name="icon">
     <iconset>
      <normaloff>image/zoom_in.png</normaloff>image/zoom_in.png</iconset>
@@ -134,7 +131,7 @@
     <string>放大</string>
    </property>
   </action>
-  <action name="zoom_out_action">
+  <action name="action_zoom_out">
    <property name="icon">
     <iconset>
      <normaloff>image/zoom_out.png</normaloff>image/zoom_out.png</iconset>
