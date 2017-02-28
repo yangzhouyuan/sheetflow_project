@@ -1,30 +1,32 @@
-﻿#ifndef SHEETFLOW_MAIN_H
-#define SHEETFLOW_MAIN_H
+﻿#pragma once
 
 #include <QMainWindow>
-#include <QToolBar>
+#include <memory>
+
+
+using std::unique_ptr;
 
 namespace Ui {
 class sheetflow_main;
 }
 
+struct impl_sheetflow_main;
+
 class sheetflow_main : public QMainWindow
 {
     Q_OBJECT
-
 public:
-    explicit sheetflow_main(QWidget *parent = 0);
     ~sheetflow_main();
+    static unique_ptr<sheetflow_main> make ();
+protected:
+    explicit sheetflow_main(QWidget *parent = 0);
+    bool init ();
 private:
-    void create_toolbar ();
-
+    void create_toolbars ();
+    void connections ();
+    void create_actions ();
 
 private:
-    Ui::sheetflow_main *ui;
-    QToolBar* file_toolbar_ = addToolBar("文件");
-    QToolBar* window_toolbar_ = addToolBar("窗口");
-    QToolBar* edit_toolbar_ = addToolBar("编辑");
-
+    unique_ptr<sheetflow_main> imp;
 };
 
-#endif // SHEETFLOW_MAIN_H

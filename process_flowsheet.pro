@@ -8,15 +8,17 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++14
+
 TARGET = process_flowsheet
 TEMPLATE = app
 
 
 SOURCES += main.cc\
         sheetflow_main.cc \
-    draw.cc
+    drag_widget.cc
 
 HEADERS  += sheetflow_main.h \
-    draw.h
+    drag_widget.h
 
 FORMS    += sheetflow_main.ui

@@ -1,24 +1,54 @@
 ﻿#include "sheetflow_main.h"
 #include "ui_sheetflow_main.h"
+#include <QToolBar>
+
+
+struct impl_sheetflow_main
+{
+
+};
 
 sheetflow_main::sheetflow_main(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::sheetflow_main)
+    QMainWindow(parent)
 {
-    ui->setupUi(this);
-    create_toolbar();
+}
+
+bool sheetflow_main::init()
+{
+    create_toolbars ();
+
+    create_actions ();
+    // create_buttons ();
+    connections ();
+
+    return true;
 }
 
 sheetflow_main::~sheetflow_main()
 {
-    delete ui;
 }
 
-void sheetflow_main::create_toolbar()
+unique_ptr<sheetflow_main> sheetflow_main::make()
 {
-    file_toolbar_->addActions({ui->file_new_action,ui->file_open_action,
-                              ui->file_save_action,ui->fiel_other_action,
-                              ui->printf_action});
-    window_toolbar_->addAction(ui->display_draw_action);
-    edit_toolbar_->addActions({ui->zoom_in_action, ui->zoom_out_action});
+    unique_ptr<sheetflow_main> ret (new sheetflow_main);
+    if (ret == nullptr or ! ret->init ())
+    {
+        return nullptr;
+    }
+
+    return ret;
+}
+
+void sheetflow_main::create_toolbars()
+{
+}
+
+void sheetflow_main::connections()
+{
+
+}
+
+void sheetflow_main::create_actions()
+{
+
 }
