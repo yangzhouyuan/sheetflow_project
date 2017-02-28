@@ -39,7 +39,7 @@ unique_ptr<sheetflow_main> sheetflow_main::make()
     return ret;
 }
 
-void sheetflow_main::create_toolbar()
+void sheetflow_main::create_toolbars()
 {
 }
 
