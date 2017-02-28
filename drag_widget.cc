@@ -16,6 +16,11 @@ unique_ptr<drag_widget> drag_widget::make(std::vector<QString> names)
     return ret;
 }
 
+drag_widget::~drag_widget()
+{
+
+}
+
 drag_widget::drag_widget(std::vector<QString> names, QWidget *parent)
     :QWidget (parent)
     ,imp (std::make_unique<impl_drag_widget> ())
