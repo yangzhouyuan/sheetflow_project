@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cc\
-        sheetflow_main.cc
+        sheetflow_main.cc \
+    draw.cc
 
-HEADERS  += sheetflow_main.h
+HEADERS  += sheetflow_main.h \
+    draw.h
 
 FORMS    += sheetflow_main.ui
