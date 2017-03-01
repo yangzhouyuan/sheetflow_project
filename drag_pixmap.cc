@@ -34,7 +34,6 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
         {"产成品", finished_product_maker},
         {"连线1", straight_line_maker},
         {"连线2", broken_line_maker}
-
     };
 
     QPainter painter (&pm);
@@ -56,7 +55,7 @@ QPixmap make_pixmap(const QString &name, qreal width, qreal height)
 static void raw_material_maker(QPainter* painter,qreal width, qreal height)
 {
     auto font = painter->font();
-    font.setPointSizeF(height);
+    font.setPointSizeF(height * 0.8);
     font.setBold(true);
     painter->setFont(font);
 
@@ -74,9 +73,11 @@ static void machining_maker(QPainter* painter,qreal width, qreal height)
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(0.02 * width);
+
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
     painter->drawEllipse(QRectF(0.3 * width, height * 20 / 80, 0.5 * width, height * 50 / 80));
+
 }
 
 static void checkout_maker(QPainter* painter,qreal width, qreal height)
