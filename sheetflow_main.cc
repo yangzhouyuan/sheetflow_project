@@ -31,9 +31,6 @@ struct impl_sheetflow_main
     QAction* action_draw ;
     QAction* action_zoom_in;
     QAction* action_zoom_out;
-    QMdiArea* mdiare;
-    QGraphicsScene* scene;
-
 
 };
 
@@ -45,12 +42,11 @@ sheetflow_main::sheetflow_main(QWidget *parent) :
 
 bool sheetflow_main::init()
 {
+
     create_actions ();
-
+    set_mdiare();
     create_toolbars ();
-
     connections ();
-
     return true;
 }
 
@@ -114,25 +110,24 @@ void sheetflow_main::create_actions()
     imp->menu_window->addAction(imp->action_draw);
     imp->menu_edit->addActions({imp->action_zoom_in,imp->action_zoom_out});
 }
-
-canvas *sheetflow_main::create_canvas_body()
+canvas* sheetflow_main::create_canvas_body()
 {
-    set_mdiare();
-    imp->scene = new QGraphicsScene(this);
-    canvas* canva = new canvas(imp->scene);
-    canva->setAttribute (Qt::WA_DeleteOnClose);
-    canva->setWindowState(Qt::WindowMaximized);
-    imp->mdiare->addSubWindow(canva);
-    return canva;
+     canvas* canva = new canvas();
+     qDebug() << "create_body";
+     mdiare->addSubWindow(canva);
+     return canva;
+
 }
+
 void sheetflow_main::set_mdiare()
 {
-    imp->mdiare = new QMdiArea(this);
-    imp->mdiare->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    imp->mdiare->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    setCentralWidget(imp->mdiare);
-    imp->mdiare->setViewMode (QMdiArea::TabbedView);
+    mdiare->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    mdiare->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setCentralWidget(mdiare);
+    mdiare->setViewMode (QMdiArea::TabbedView);
+
 }
+
 
 
 void sheetflow_main::create_toolbars()

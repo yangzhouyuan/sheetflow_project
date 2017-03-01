@@ -4,8 +4,6 @@
 #include <memory>
 #include <canvas.h>
 #include <QMdiArea>
-
-
 using std::unique_ptr;
 
 namespace Ui {
@@ -28,11 +26,16 @@ private:
     void create_toolbars ();
     void connections ();
     void create_actions ();
-     canvas* create_canvas_body();
-     void set_mdiare ();
+    canvas* create_canvas_body();
+
+    void set_mdiare ();
 
 private:
     unique_ptr<impl_sheetflow_main> imp;
+    QMdiArea* mdiare = new QMdiArea(this);
+
+
+
 
 };
 
