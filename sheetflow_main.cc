@@ -31,6 +31,7 @@ struct impl_sheetflow_main
     QAction* action_zoom_in;
     QAction* action_zoom_out;
 
+    QMdiArea* mdiare = new QMdiArea();
 };
 
 sheetflow_main::sheetflow_main(QWidget *parent) :
@@ -46,6 +47,8 @@ bool sheetflow_main::init()
     set_mdiare();
     create_toolbars ();
     connections ();
+    set_draw_widget_name();
+    set_draw();
     return true;
 }
 
@@ -113,17 +116,36 @@ canvas* sheetflow_main::create_canvas_body()
 {
      canvas* canva = canvas::make ().release();
 
-     mdiare->addSubWindow(canva);
+     imp->mdiare->addSubWindow(canva);
      return canva;
 
 }
 
+void sheetflow_main::set_draw()
+{
+    drawer_->setMaximumWidth (150);
+    drawer_->setMinimumWidth (150);
+    draw_widget->setMaximumWidth (140);
+    draw_widget->setMinimumWidth (140);
+
+    drawer_->setWidget (draw_widget.get ());
+    drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
+    addDockWidget (Qt::LeftDockWidgetArea, drawer_.get ());
+}
+
 void sheetflow_main::set_mdiare()
 {
-    mdiare->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    mdiare->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    setCentralWidget(mdiare);
-    mdiare->setViewMode (QMdiArea::TabbedView);
+    imp->mdiare->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    imp->mdiare->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setCentralWidget(imp->mdiare);
+    imp->mdiare->setViewMode (QMdiArea::TabbedView);
+
+}
+
+void sheetflow_main::set_draw_widget_name()
+{
+     std::vector<QString>  names = {"原材料", "加工", "检验", "产成品", "连线1", "连线2"};
+     draw_widget =drag_widget::make(names);
 
 }
 
