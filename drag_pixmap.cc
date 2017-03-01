@@ -8,8 +8,7 @@
 #include <QLineF>
 
 
-namespace drawer
-<%
+
 using namespace std;
 using pixmap_maker = void (*)  (QPainter*, qreal, qreal); //定义函数指针
 
@@ -132,4 +131,4 @@ static void broken_line_maker(QPainter* painter,qreal width, qreal height)
 }
 
 
-%>
+

@@ -5,7 +5,7 @@
 #include <canvas.h>
 #include <QMdiArea>
 #include <QDockWidget>
-#include <drag_widget.h>
+#include "drag_widget.h"
 using std::unique_ptr;
 
 namespace Ui {
@@ -36,8 +36,6 @@ private:
     unique_ptr<impl_sheetflow_main> imp;
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
     std::unique_ptr<drag_widget> draw_widget;
-
-
 
 };
 

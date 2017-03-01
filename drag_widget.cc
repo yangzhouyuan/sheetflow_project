@@ -56,7 +56,7 @@ bool drag_widget::init()
     auto v_layout = new QVBoxLayout(this);
     for (auto & name : imp->label_names)
     {
-        auto map = drawer::make_pixmap (name, 100, 80);
+        auto map = make_pixmap (name, 100, 80);
 
         auto pic_label = new QLabel (this);
         pic_label->setObjectName(name);
@@ -73,7 +73,7 @@ bool drag_widget::init()
     imp->buttons.reserve(imp->button_names.size ());
     for (auto & it : imp->button_names)
     {
-        auto button = new QPushButton (drawer::make_pixmap(it, 100, 80), "", this);
+        auto button = new QPushButton (make_pixmap(it, 100, 80), "", this);
         button->setObjectName(it);
         button->setIconSize({100, 80});
         button->setCheckable(true);
@@ -113,7 +113,7 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         return;
     }
 
-    auto pm = drawer::make_pixmap(object_name, 100, 80);
+    auto pm = make_pixmap(object_name, 100, 80);
 
     QDrag drag(this);
     auto data = std::make_unique<QMimeData> ();
