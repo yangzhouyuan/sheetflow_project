@@ -18,12 +18,14 @@ SOURCES += main.cc\
 	sheetflow_main.cc \
     drag_widget.cc \
     drag_pixmap.cc \
-    canvas.cc
+    canvas.cc \
+    canvas_scene.cc
 
 HEADERS  += sheetflow_main.h \
     drag_widget.h \
     drag_pixmap.h \
-    canvas.h
+    canvas.h \
+    canvas_scene.h
 
 FORMS    +=
 

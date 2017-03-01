@@ -1,5 +1,4 @@
 ﻿#include "sheetflow_main.h"
-#include "ui_sheetflow_main.h"
 #include <QToolBar>
 #include <QMenu>
 #include <QAction>
@@ -118,7 +117,8 @@ void sheetflow_main::create_actions()
 }
 canvas* sheetflow_main::create_canvas_body()
 {
-     canvas* canva = new canvas();
+     canvas* canva = canvas::make ().release();
+
      imp->mdiare->addSubWindow(canva);
      return canva;
 

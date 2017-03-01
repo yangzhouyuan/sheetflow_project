@@ -1,14 +1,24 @@
 ﻿#include "canvas.h"
 
-canvas::canvas(QGraphicsView *parent)
-    :QGraphicsView(parent)
+canvas::~canvas()
 {
 
 }
 
-canvas::canvas(QGraphicsScene *scene, QGraphicsView *parent)
-    :QGraphicsView(scene,parent)
+bool canvas::init()
 {
-    setScene(scene);
-
+    return true;
 }
+
+//canvas::canvas(QGraphicsView *parent)
+//    :QGraphicsView(parent)
+//{
+
+//}
+
+//canvas::canvas(QGraphicsScene *scene, QGraphicsView *parent)
+//    :QGraphicsView(scene,parent)
+//{
+//    setScene(scene);
+
+//}
