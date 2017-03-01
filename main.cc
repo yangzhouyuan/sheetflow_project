@@ -2,6 +2,8 @@
 #include <QApplication>
 #include "drag_widget.h"
 #include <vector>
+#include "canvas_scene.h"
+#include "canvas.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +16,11 @@ int main(int argc, char *argv[])
 
     auto wm = sheetflow_main::make();
 
-    w->show();
+    auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
+    auto canvas = canvas::make(scene.get());
+    canvas->show();
+
+    w->show ();
     wm->show();
     return a.exec();
 }
