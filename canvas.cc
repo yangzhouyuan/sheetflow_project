@@ -1,5 +1,15 @@
 ﻿#include "canvas.h"
 
+canvas::~canvas()
+{
+
+}
+
+bool canvas::init()
+{
+    return true;
+}
+
 canvas::canvas(QGraphicsView *parent)
     :QGraphicsView(parent)
 {
