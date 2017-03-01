@@ -19,7 +19,7 @@ public:
                                          std::vector<QString> buttons = {},
                                          QWidget* parent = nullptr);
     void reset_status ();
-    ~drag_widget () override;
+    virtual ~drag_widget () override;
 protected:
     explicit drag_widget(std::vector<QString> labels, std::vector<QString> buttons,  QWidget *parent = 0);
     bool init ();
