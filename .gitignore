@@ -11,7 +11,7 @@
 !/**/*.pri
 !/**/
 !/**/*.svg
-!/**/*.png
+
 
 /debug
 /release
