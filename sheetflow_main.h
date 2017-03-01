@@ -32,7 +32,6 @@ private:
 
 private:
     unique_ptr<impl_sheetflow_main> imp;
-    QMdiArea* mdiare = new QMdiArea(this);
 
 
 

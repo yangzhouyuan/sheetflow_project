@@ -32,6 +32,7 @@ struct impl_sheetflow_main
     QAction* action_zoom_in;
     QAction* action_zoom_out;
 
+    QMdiArea* mdiare = new QMdiArea();
 };
 
 sheetflow_main::sheetflow_main(QWidget *parent) :
@@ -114,17 +115,17 @@ canvas* sheetflow_main::create_canvas_body()
 {
      canvas* canva = new canvas();
      qDebug() << "create_body";
-     mdiare->addSubWindow(canva);
+     imp->mdiare->addSubWindow(canva);
      return canva;
 
 }
 
 void sheetflow_main::set_mdiare()
 {
-    mdiare->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    mdiare->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-    setCentralWidget(mdiare);
-    mdiare->setViewMode (QMdiArea::TabbedView);
+    imp->mdiare->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    imp->mdiare->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    setCentralWidget(imp->mdiare);
+    imp->mdiare->setViewMode (QMdiArea::TabbedView);
 
 }
 
