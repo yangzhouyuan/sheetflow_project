@@ -15,12 +15,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cc\
-        sheetflow_main.cc \
+	sheetflow_main.cc \
     drag_widget.cc \
+    drag_pixmap.cc \
     canvas.cc
 
 HEADERS  += sheetflow_main.h \
     drag_widget.h \
+    drag_pixmap.h \
     canvas.h
 
 FORMS    +=
