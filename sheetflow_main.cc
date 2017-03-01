@@ -11,6 +11,7 @@
 #include <memory>
 #include <QMdiSubWindow>
 #include <QDebug>
+#include <QDockWidget>
 struct impl_sheetflow_main
 {
     QMenuBar* menu;
@@ -31,6 +32,8 @@ struct impl_sheetflow_main
     QAction* action_draw ;
     QAction* action_zoom_in;
     QAction* action_zoom_out;
+    std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget>();
+    std::unique_ptr<drag_widget> draw_widget;
 
     QMdiArea* mdiare = new QMdiArea();
 };
@@ -123,14 +126,15 @@ canvas* sheetflow_main::create_canvas_body()
 
 void sheetflow_main::set_draw()
 {
-    drawer_->setMaximumWidth (150);
-    drawer_->setMinimumWidth (150);
-    draw_widget->setMaximumWidth (140);
-    draw_widget->setMinimumWidth (140);
+    imp->drawer_->setMaximumWidth (150);
+    imp->drawer_->setMinimumWidth (150);
 
-    drawer_->setWidget (draw_widget.get ());
-    drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
-    addDockWidget (Qt::LeftDockWidgetArea, drawer_.get ());
+    imp->draw_widget->setMaximumWidth (140);
+    imp->draw_widget->setMinimumWidth (140);
+
+    imp->drawer_->setWidget (imp->draw_widget.get ());
+    imp->drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
+    addDockWidget (Qt::LeftDockWidgetArea, imp->drawer_.get ());
 }
 
 void sheetflow_main::set_mdiare()
@@ -145,7 +149,7 @@ void sheetflow_main::set_mdiare()
 void sheetflow_main::set_draw_widget_name()
 {
      std::vector<QString>  names = {"原材料", "加工", "检验", "产成品", "连线1", "连线2"};
-     draw_widget =drag_widget::make(names);
+     imp->draw_widget =drag_widget::make(names);
 
 }
 

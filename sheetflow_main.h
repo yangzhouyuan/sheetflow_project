@@ -34,8 +34,7 @@ private:
     void set_draw_widget_name ();
 private:
     unique_ptr<impl_sheetflow_main> imp;
-    std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget> (this);
-    std::unique_ptr<drag_widget> draw_widget;
+
 
 
 
