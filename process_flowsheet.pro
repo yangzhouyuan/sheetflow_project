@@ -16,9 +16,15 @@ TEMPLATE = app
 
 SOURCES += main.cc\
         sheetflow_main.cc \
-    drag_widget.cc
+    drag_widget.cc \
+    canvas.cc
 
 HEADERS  += sheetflow_main.h \
-    drag_widget.h
+    drag_widget.h \
+    canvas.h
 
-FORMS    += sheetflow_main.ui
+FORMS    +=
+
+RESOURCES +=
+
+DISTFILES +=
