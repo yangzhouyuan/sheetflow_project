@@ -2,7 +2,7 @@
 
 #include <QMainWindow>
 #include <memory>
-#include <canvas.h>
+#include <canvas_view.h>
 #include <QMdiArea>
 #include <QDockWidget>
 #include "drag_widget.h"
@@ -28,7 +28,7 @@ private:
     void create_toolbars ();
     void connections ();
     void create_actions ();
-    canvas* create_canvas_body();
+    canvas_view* create_canvas_body();
     void set_draw ();
     void set_mdiare ();
     void set_draw_widget_name ();

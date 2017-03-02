@@ -6,6 +6,7 @@
 #include <QDrag>
 #include <QMimeData>
 #include <QPushButton>
+#include <QDebug>
 
 struct impl_drag_widget
 {
@@ -132,7 +133,6 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
 void drag_widget::hideEvent(QHideEvent *event)
 {
     QWidget::hideEvent(event);
-
     reset_status ();
 }
 

@@ -73,7 +73,7 @@ unique_ptr<sheetflow_main> sheetflow_main::make()
 
 void sheetflow_main::file_new()
 {
-    canvas* canva = create_canvas_body();
+    canvas_view* canva = create_canvas_body();
     canva->show();
 }
 
@@ -116,10 +116,10 @@ void sheetflow_main::create_actions()
     imp->menu_window->addAction(imp->action_draw);
     imp->menu_edit->addActions({imp->action_zoom_in,imp->action_zoom_out});
 }
-canvas* sheetflow_main::create_canvas_body()
+canvas_view* sheetflow_main::create_canvas_body()
 {
      auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
-     canvas* canva = canvas::make (scene.get()).release();
+     canvas_view* canva = canvas_view::make (scene.get()).release();
 
      imp->mdiare->addSubWindow(canva);
      return canva;

@@ -3,7 +3,8 @@
 #include "drag_widget.h"
 #include <vector>
 #include "canvas_scene.h"
-#include "canvas.h"
+#include "canvas_view.h"
+#include "item/raw_material.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,9 +17,13 @@ int main(int argc, char *argv[])
 
     auto wm = sheetflow_main::make();
 
-//    auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
-//    auto canvas = canvas::make(scene.get());
-//    canvas->show();
+    auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
+    auto item = raw_material::make(QPointF(30,50));
+    scene->addItem(item.get());
+    auto canvas = canvas_view::make(scene.get());
+
+
+    canvas->show();
 
    // w->show ();
     wm->show();
