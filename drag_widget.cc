@@ -10,6 +10,8 @@
 #include "item/machining.h"
 #include <QPixmap>
 #include <QPainter>
+#include "item/maker.hpp"
+#include <QStyleOption>
 
 struct impl_drag_widget
 {
@@ -117,8 +119,14 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         return;
     }
 
+        auto item = make_item(object_name, pos);
+        auto rect = item->boundingRect();
+        QPixmap pix(static_cast<int>(rect.width()), static_cast<int>(rect.height()));
+        QPainter painter(&pix);
+        QStyleOptionGraphicsItem option;
+        item->paint(&painter, &option, nullptr);
 
-    auto pm = make_pixmap(object_name, 100, 80);
+//    auto pm = make_pixmap(object_name, 100, 80);
 
     QDrag drag(this);
     auto data = std::make_unique<QMimeData> ();
@@ -128,10 +136,11 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
     }
 
     drag.setMimeData (data.release ());
-    drag.setPixmap (pm);
-    drag.setHotSpot ({pm.width () / 2, pm.height() / 2});
+    drag.setPixmap (pix);
+    drag.setHotSpot ({pix.width () / 2, pix.height() / 2});
 
     drag.exec(Qt::CopyAction);
+
 }
 
 void drag_widget::hideEvent(QHideEvent *event)

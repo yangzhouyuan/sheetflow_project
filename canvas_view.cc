@@ -62,7 +62,7 @@ void canvas_view::drop_action(QDropEvent *event)
     const auto pos = event->pos();
     const auto scene_pos = mapToScene(pos);
 
-    auto item = make_item( type, scene_pos);
+    auto item = make_item(type, scene_pos);
 
     const auto rect_center = item->boundingRect().center();
     auto center_pos = scene_pos - rect_center;

@@ -8,7 +8,6 @@
 
 using constructor = std::unique_ptr<item> (*) (item* parent);
 
-
 inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
 {
     using up_item = std::unique_ptr<item>;
