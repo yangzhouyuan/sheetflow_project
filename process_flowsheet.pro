@@ -33,7 +33,8 @@ HEADERS  += sheetflow_main.h \
     item/item.h \
     canvas_view.h \
     item/machining.h \
-    item/raw_material.h
+    item/raw_material.h \
+    item/maker.hpp
 
 FORMS    +=
 

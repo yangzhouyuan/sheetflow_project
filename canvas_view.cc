@@ -3,6 +3,7 @@
 #include <QMimeData>
 #include <QDropEvent>
 #include "item/raw_material.h"
+#include "item/maker.hpp"
 
 
 canvas_view::~canvas_view()
@@ -53,16 +54,15 @@ void canvas_view::dropEvent(QDropEvent *event)
 
 }
 
-#include "item/machining.h"
+
 void canvas_view::drop_action(QDropEvent *event)
 {
     QString type = event->mimeData ()->data ("item");
 
-    qDebug () << type;
     const auto pos = event->pos();
     const auto scene_pos = mapToScene(pos);
 
-    auto item =  machining::make(scene_pos, Qt::black);
+    auto item = make_item( type, scene_pos);
 
     const auto rect_center = item->boundingRect().center();
     auto center_pos = scene_pos - rect_center;

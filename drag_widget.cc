@@ -8,6 +8,8 @@
 #include <QPushButton>
 #include <QDebug>
 #include "item/machining.h"
+#include <QPixmap>
+#include <QPainter>
 
 struct impl_drag_widget
 {
