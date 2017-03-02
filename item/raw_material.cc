@@ -16,6 +16,7 @@ std::unique_ptr<raw_material> raw_material::make(QPointF point)
 raw_material::raw_material(QPointF point)
 {
     setPos (point);
+    setFlags (ItemIsSelectable | ItemIsMovable);
 }
 
 

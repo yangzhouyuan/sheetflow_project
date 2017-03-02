@@ -7,8 +7,6 @@
 #include <algorithm>
 #include <QLineF>
 
-
-
 using namespace std;
 using pixmap_maker = void (*)  (QPainter*, qreal, qreal); //定义函数指针
 

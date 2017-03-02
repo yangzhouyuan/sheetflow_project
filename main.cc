@@ -5,6 +5,7 @@
 #include "canvas_scene.h"
 #include "canvas_view.h"
 #include "item/raw_material.h"
+#include "item/machining.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +20,9 @@ int main(int argc, char *argv[])
 
     auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
     auto item = raw_material::make(QPointF(30,50));
-    scene->addItem(item.get());
+    scene->addItem(item.release());
+    auto maching_item = machining::make(QPointF(50,70));
+    scene->addItem(maching_item.release());
     auto canvas = canvas_view::make(scene.get());
 
 

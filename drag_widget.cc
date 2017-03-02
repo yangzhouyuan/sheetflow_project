@@ -7,6 +7,7 @@
 #include <QMimeData>
 #include <QPushButton>
 #include <QDebug>
+#include "item/machining.h"
 
 struct impl_drag_widget
 {
@@ -113,6 +114,7 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
     {
         return;
     }
+
 
     auto pm = make_pixmap(object_name, 100, 80);
 
