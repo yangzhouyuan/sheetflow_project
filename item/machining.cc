@@ -13,8 +13,8 @@ unique_ptr<machining> machining::make(QPointF pos, QColor color)
 machining::machining(item *parent)
     :item(parent)
 {
-    item_width_ /= narrow_object_ratio;
-    item_height_ /= narrow_object_ratio;
+    item_width_ /= narrow_object_ratio_;
+    item_height_ /= narrow_object_ratio_;
 }
 
 void machining::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

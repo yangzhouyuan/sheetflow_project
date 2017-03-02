@@ -23,7 +23,9 @@ SOURCES += main.cc\
     item/item.cc \
     canvas_view.cc \
     item/machining.cc \
-    item/raw_material.cc
+    item/raw_material.cc \
+    item/checkout.cc \
+    item/finished_product.cc
 
 HEADERS  += sheetflow_main.h \
     drag_widget.h \
@@ -34,7 +36,9 @@ HEADERS  += sheetflow_main.h \
     canvas_view.h \
     item/machining.h \
     item/raw_material.h \
-    item/maker.hpp
+    item/maker.hpp \
+    item/checkout.h \
+    item/finished_product.h
 
 FORMS    +=
 

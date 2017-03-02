@@ -3,6 +3,8 @@
 #include <memory>
 #include <QGraphicsScene>
 #include "item/machining.h"
+#include "item/checkout.h"
+#include "item/finished_product.h"
 
 using constructor = std::unique_ptr<item> (*) (item* parent);
 
@@ -15,6 +17,8 @@ inline std::unique_ptr<item> make_item (const QString& classname, QPointF pos)
     static std::map<QString, item_maker> type_map
     {
         {"加工", [] (QPointF p)->up_item { return machining::make (p, Qt::black); }},
+        {"检验", [] (QPointF p)->up_item { return checkout::make (p, Qt::black); }},
+        {"产成品", [] (QPointF p)->up_item { return finished_product::make (p, Qt::black); }}
 
     };
 

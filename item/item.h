@@ -19,6 +19,7 @@ protected:
 //    unique_ptr<impl_item> imp;
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;
-    static constexpr qreal narrow_object_ratio = 1.2;
+    static constexpr qreal narrow_object_ratio_ = 1.2;
+    static constexpr qreal enlarge_object_ratio_ = 2;
     QString type_;
 };
