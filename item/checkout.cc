@@ -4,6 +4,7 @@
 
 unique_ptr<checkout> checkout::make(QPointF pos, QColor color)
 {
+    Q_UNUSED(color);
     unique_ptr <checkout> ret(new checkout);
     ret->setPos(pos);
     ret->type_ = "加工";
@@ -12,13 +13,15 @@ unique_ptr<checkout> checkout::make(QPointF pos, QColor color)
 
 checkout::checkout(item *parent)
 {
+    Q_UNUSED(parent);
     item_width_ /= narrow_object_ratio_;
     item_height_ /= narrow_object_ratio_;
 }
 
 void checkout::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setFont(font_);
+    item::paint(painter, option, widget);
+
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
     the_pen.setWidthF(0.02 * item_width_);
@@ -46,6 +49,7 @@ void checkout::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 void checkout::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event);
     QInputDialog dlg;
     dlg.setInputMode (QInputDialog::IntInput);
     dlg.setLabelText("序号");
@@ -58,8 +62,6 @@ void checkout::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     }
 
     checkout_info_ = dlg.textValue();
-    dlg.exec();
-
 }
 
 //QRectF checkout::boundingRect() const

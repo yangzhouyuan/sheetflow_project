@@ -4,6 +4,7 @@
 
 unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
 {
+    Q_UNUSED(color);
     unique_ptr <finished_product> ret(new finished_product);
     ret->setPos(pos);
     ret->type_ = "产成品";
@@ -12,10 +13,13 @@ unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
 
 finished_product::finished_product(item *parent)
 {
+    Q_UNUSED(parent);
 }
 
 void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    item::paint(painter, option, widget);
+
     painter->setFont(font_);
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
@@ -43,6 +47,7 @@ void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 
 void finished_product::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
+    Q_UNUSED(event);
     QInputDialog dlg;
     dlg.setInputMode (QInputDialog::TextInput);
     dlg.setLabelText("产品信息");
