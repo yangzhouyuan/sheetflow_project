@@ -1,5 +1,6 @@
 #pragma once
 #include "item/item.h"
+#include <QFont>
 
 class finished_product : public item
 {
@@ -9,6 +10,10 @@ protected:
     finished_product(item* parent = nullptr);
     void paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override;
+    QRectF boundingRect () const override;
+private:
+    QString product_info_;
+    QFont font_;
 };
 
 

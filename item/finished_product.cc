@@ -12,18 +12,33 @@ unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
 
 finished_product::finished_product(item *parent)
 {
-    item_width_ *= enlarge_object_ratio_;
-    item_height_ *= enlarge_object_ratio_;
 }
 
 void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+    painter->setFont(font_);
     auto the_pen = painter->pen();
     the_pen.setColor(Qt::black);
-    the_pen.setWidthF(0.01 * item_width_);
+    the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
-    painter->drawRect(QRectF(0.07 * item_width_, item_height_ * 25 / 80, 0.85 * item_width_, item_height_ * 30 / 80));
+    const QFontMetricsF metrics (painter->font());
+    auto text_size = metrics.size(Qt::TextWordWrap, product_info_);
+    auto text_w = text_size.width();
+    auto text_h = text_size.height();
+
+    const auto rect_w = std::max (item_width_ - 10, text_w + 10);
+    const auto rect_h = text_h + 10;
+
+    const QRectF rect (0, 0, rect_w, rect_h);
+    auto center = rect.center();
+
+    QRectF text_rect (center.x() - text_w / 2, center.y() - text_h / 2, text_w, text_h);
+
+    painter->drawRect(rect);
+    painter->drawText(text_rect, Qt::TextWordWrap, product_info_);
+
+    //painter->drawRect(QRectF(0.07 * item_width_, item_height_ * 25 / 80, 0.85 * item_width_, item_height_ * 30 / 80));
 }
 
 void finished_product::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
@@ -31,6 +46,26 @@ void finished_product::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     QInputDialog dlg;
     dlg.setInputMode (QInputDialog::TextInput);
     dlg.setLabelText("产品信息");
+    dlg.setTextValue (product_info_);
 
-    dlg.exec();
+    auto action = dlg.exec();
+    if (action == QInputDialog::Rejected)
+    {
+        return;
+    }
+
+    product_info_ = dlg.textValue();
+}
+
+QRectF finished_product::boundingRect() const
+{
+    const QFontMetricsF metrics (font_);
+    auto text_size = metrics.size(Qt::TextWordWrap, product_info_);
+    auto text_w = text_size.width();
+    auto text_h = text_size.height();
+
+    auto rect_w = std::max (item_width_ - 10, text_w + 10);
+    auto rect_h = text_h + 10;
+
+    return QRectF (0, 0, rect_w, rect_h);
 }

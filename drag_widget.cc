@@ -122,11 +122,11 @@ void drag_widget::mousePressEvent(QMouseEvent *event)
         auto item = make_item(object_name, pos);
         auto rect = item->boundingRect();
         QPixmap pix(static_cast<int>(rect.width()), static_cast<int>(rect.height()));
+        pix.fill(Qt::transparent);
         QPainter painter(&pix);
+        painter.setRenderHint(QPainter::Antialiasing);
         QStyleOptionGraphicsItem option;
         item->paint(&painter, &option, nullptr);
-
-//    auto pm = make_pixmap(object_name, 100, 80);
 
     QDrag drag(this);
     auto data = std::make_unique<QMimeData> ();
