@@ -45,3 +45,5 @@ void raw_material::focusOutEvent(QFocusEvent *event)
         deleteLater();
     }
 }
+
+

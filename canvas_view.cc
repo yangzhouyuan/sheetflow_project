@@ -211,6 +211,9 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
         scene()->addPolygon({points});
 
 
+
+
+
         broken_lines_.clear();
     }
 }
