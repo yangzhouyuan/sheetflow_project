@@ -253,6 +253,9 @@ void canvas_view::drop_action(QDropEvent *event)
     auto center_pos = scene_pos - rect_center;
     item->setPos(center_pos);
     scene ()->addItem(item.release());
+//    auto s = scene();
+//    qDebug() << s;
+//    s->addItem(item.release());
 
 }
 

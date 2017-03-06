@@ -180,3 +180,8 @@ void drag_widget::on_button_pressed()
         emit button_triggered("");
     }
 }
+
+
+
+
+

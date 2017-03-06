@@ -28,10 +28,11 @@ private:
     void create_toolbars ();
     void connections ();
     void create_actions ();
-    canvas_view* create_canvas_body();
     void set_draw ();
     void set_mdiare ();
     void set_draw_widget_name ();
+//    static unique_ptr<canvas_view> create_canvas_body();
+    canvas_view* create_canvas_body();
 private:
     unique_ptr<impl_sheetflow_main> imp;
 

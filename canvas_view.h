@@ -17,6 +17,7 @@ public:
     enum class draw_type
     {
         NONE,
+
         STRAIGHTLINE,
         BROKENLINE
     };
