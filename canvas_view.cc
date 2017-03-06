@@ -6,6 +6,7 @@
 #include "item/maker.hpp"
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
+#include "item/broken_line.h"
 
 canvas_view::draw_type canvas_view::return_type()
 {
@@ -198,7 +199,6 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
         }
 
         QVector<QPointF> points;
-        QVector<QLineF> lines;
 
         const auto p1 = broken_lines_.front()->line().p1();
         points.push_back(p1);
@@ -208,11 +208,12 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
             points.push_back(it->line().p2());
         }
 
-        scene()->addPolygon({points});
+        auto broke = broken_line::make (points);
 
-
-
-
+        scene()->addItem(broke.get());
+        QPainter painter;
+        QStyleOptionGraphicsItem option;
+        broke.release()->paint(&painter, &option, this);
 
         broken_lines_.clear();
     }
