@@ -12,7 +12,7 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override;
     QRectF boundingRect () const override;
 private:
-    QString product_info_;
+    QString product_info_ ;
     QFont font_;
 };
 

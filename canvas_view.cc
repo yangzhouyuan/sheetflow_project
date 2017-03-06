@@ -208,7 +208,8 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
             points.push_back(it->line().p2());
         }
 
-        graphics_.emplace_back (scene()->addPolygon({points}));
+        scene()->addPolygon({points});
+
 
         broken_lines_.clear();
     }
