@@ -70,7 +70,7 @@ private:
 
 
 private:
-    canvas_view::draw_type type_ = canvas_view::draw_type::BROKENLINE;
+    canvas_view::draw_type type_ = canvas_view::draw_type::NONE;
     QPointF begin_;
 
     unique_ptr<QGraphicsLineItem>  straight_line_item_ = nullptr;

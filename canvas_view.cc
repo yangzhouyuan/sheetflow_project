@@ -15,7 +15,18 @@ canvas_view::draw_type canvas_view::return_type()
 
 void canvas_view::set_type_string(const QString &type)
 {
-
+    if ( type == "连线1")
+    {
+        set_type(draw_type::STRAIGHTLINE);
+    }
+    else if ( type == "连线2")
+    {
+        set_type(draw_type::BROKENLINE);
+    }
+    else
+    {
+        set_type(draw_type::NONE);
+    }
 }
 
 void canvas_view::set_type(canvas_view::draw_type t)

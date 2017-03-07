@@ -12,6 +12,8 @@
 #include <QDebug>
 #include <QDockWidget>
 #include "canvas_body.h"
+#include <QPushButton>
+
 struct impl_sheetflow_main
 {
     QMenuBar* menu;
@@ -54,6 +56,11 @@ bool sheetflow_main::init()
     set_draw_widget_name();
     set_draw();
     return true;
+}
+
+void sheetflow_main::drag_button_status(const QString &status)
+{
+     Q_UNUSED(status);
 }
 
 sheetflow_main::~sheetflow_main()
@@ -123,6 +130,7 @@ canvas_view* sheetflow_main::create_canvas_body()
      auto canva = canvas_view::make ();
      auto ptr_canva = canva.get();
 
+     connect (imp->draw_widget.get(), &drag_widget::button_triggered, ptr_canva, &canvas_view::set_type_string);
      imp->mdiare->addSubWindow(canva.release ());
      return ptr_canva;
 }
@@ -137,7 +145,8 @@ void sheetflow_main::set_draw()
 
     imp->drawer_->setWidget (imp->draw_widget.get ());
 
-    connect (imp->draw_widget.get(), &drag_widget::button_triggered, [] (const QString& text) { qDebug () << text; });
+//    connect (imp->draw_widget.get(), &drag_widget::button_triggered, [] (const QString& text) { qDebug () << text; });
+    connect (imp->draw_widget.get(), &drag_widget::button_triggered, this, &sheetflow_main::drag_button_status);
 
     imp->drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, imp->drawer_.get ());

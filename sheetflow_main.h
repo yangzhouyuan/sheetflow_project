@@ -25,6 +25,7 @@ protected:
     explicit sheetflow_main(QWidget *parent = 0);
     bool init ();
 private:
+    void drag_button_status(const QString &);
     void create_toolbars ();
     void connections ();
     void create_actions ();
