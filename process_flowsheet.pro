@@ -26,7 +26,8 @@ SOURCES += main.cc\
     item/raw_material.cc \
     item/checkout.cc \
     item/finished_product.cc \
-    item/broken_line.cc
+    item/broken_line.cc \
+    canvas_body.cc
 
 HEADERS  += sheetflow_main.h \
     drag_widget.h \
@@ -40,7 +41,8 @@ HEADERS  += sheetflow_main.h \
     item/maker.hpp \
     item/checkout.h \
     item/finished_product.h \
-    item/broken_line.h
+    item/broken_line.h \
+    canvas_body.h
 
 FORMS    +=
 

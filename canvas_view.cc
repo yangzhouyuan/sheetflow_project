@@ -13,6 +13,11 @@ canvas_view::draw_type canvas_view::return_type()
     return type_;
 }
 
+void canvas_view::set_type_string(const QString &type)
+{
+
+}
+
 void canvas_view::set_type(canvas_view::draw_type t)
 {
     if (t == type_)
@@ -46,6 +51,11 @@ canvas_view::~canvas_view()
 
 bool canvas_view::init()
 {
+    if (canvas_body::init () == false)
+    {
+        return false;
+    }
+
     setViewportUpdateMode(FullViewportUpdate);
     setMouseTracking(true);
     setRenderHints (QPainter::Antialiasing);
@@ -61,7 +71,7 @@ bool canvas_view::init()
 
 void canvas_view::mousePressEvent(QMouseEvent *event)
 {
-    QGraphicsView::mousePressEvent (event);
+    canvas_body::mousePressEvent (event);
     switch (return_type())
     {
     case canvas_view::draw_type::STRAIGHTLINE:
@@ -80,7 +90,7 @@ void canvas_view::mousePressEvent(QMouseEvent *event)
 
 void canvas_view::mouseMoveEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseMoveEvent (event); 
+    canvas_body::mouseMoveEvent (event);
     switch (return_type())
     {
     case canvas_view::draw_type::STRAIGHTLINE:
@@ -96,7 +106,7 @@ void canvas_view::mouseMoveEvent(QMouseEvent *event)
 
 void canvas_view::mouseReleaseEvent(QMouseEvent *event)
 {
-    QGraphicsView::mouseReleaseEvent (event);  
+    canvas_body::mouseReleaseEvent (event);
     switch (return_type())
     {
     case canvas_view::draw_type::STRAIGHTLINE:
@@ -119,7 +129,7 @@ void canvas_view::dragEnterEvent(QDragEnterEvent *event)
     }
     else
     {
-        QGraphicsView::dragEnterEvent(event);
+        canvas_body::dragEnterEvent(event);
     }
 }
 
@@ -131,7 +141,7 @@ void canvas_view::dragMoveEvent(QDragMoveEvent *event)
     }
     else
     {
-        QGraphicsView::dragMoveEvent(event);
+        canvas_body::dragMoveEvent(event);
     }
 }
 
@@ -144,7 +154,7 @@ void canvas_view::dropEvent(QDropEvent *event)
     }
     else
     {
-        QGraphicsView::dropEvent(event);
+        canvas_body::dropEvent(event);
     }
 
 }
@@ -188,8 +198,12 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
     if (event->buttons() == Qt::LeftButton)
     {
         const auto scene_pos = mapToScene (event->pos());
-        broken_lines_.emplace_back (
-                    scene ()->addLine(QLineF (QPointF (scene_pos), QPointF (scene_pos))));
+        const auto begin_point = broken_lines_.empty() ? scene_pos : broken_lines_.back()->line().p2();
+
+        auto new_line = scene()->addLine({begin_point, begin_point});
+        broken_lines_.emplace_back (new_line);
+
+
     }
     else if (event->buttons() == Qt::RightButton)
     {
@@ -228,8 +242,21 @@ void canvas_view::brokenline_move_event(QMouseEvent *event)
     const auto line = broken_lines_.back()->line();
     const auto p1 = line.p1();
 
+    const auto current_ptr = mapToScene(event->pos());
+    const auto mouse_line = QLineF (p1, current_ptr);
+    const auto angle = mouse_line.angle();
 
-    const auto new_p2 = mapToScene(event->pos());
+    QPointF _new_p2;
+    if ((angle < 180 - 45 and angle > 45 + 0) or (angle > 180 + 45 and angle < 360 - 45))
+    {
+        _new_p2 = QPointF (p1.x(), current_ptr.y());
+    }
+    else
+    {
+        _new_p2 = QPointF (current_ptr.x(), p1.y());
+    }
+
+    const auto new_p2 = _new_p2;
     const auto new_line = QLineF (p1, new_p2);
     broken_lines_.back()->setLine(new_line);
 }

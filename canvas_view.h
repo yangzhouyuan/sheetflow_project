@@ -5,19 +5,19 @@
 #include <memory>
 #include <vector>
 #include <QGraphicsItem>
+#include "canvas_body.h"
 
 
 using std::make_unique;
 using std::unique_ptr;
 
-class canvas_view : public QGraphicsView
+class canvas_view : public canvas_body
 {
     Q_OBJECT
 public:
     enum class draw_type
     {
         NONE,
-
         STRAIGHTLINE,
         BROKENLINE
     };
@@ -25,6 +25,7 @@ signals:
     void type_changed (canvas_view::draw_type);
 public:
     draw_type return_type ();
+    void set_type_string (const QString & type);
     void set_type (draw_type t);
 //    QPixmap pixmap ();
 public:
@@ -36,8 +37,8 @@ public:
 protected:
     bool init();
 
-    canvas_view(QWidget *parent = Q_NULLPTR): QGraphicsView (parent) { }
-    canvas_view(QGraphicsScene *scene, QWidget *parent) : QGraphicsView (scene, parent) { }
+    canvas_view(QWidget *parent = Q_NULLPTR): canvas_body (parent) { }
+    canvas_view(QGraphicsScene *scene, QWidget *parent) : canvas_body (scene, parent) { }
 
     void mousePressEvent (QMouseEvent* event) override;
     void mouseMoveEvent (QMouseEvent* event) override;
@@ -69,7 +70,7 @@ private:
 
 
 private:
-    canvas_view::draw_type type_ = canvas_view::draw_type::NONE;
+    canvas_view::draw_type type_ = canvas_view::draw_type::BROKENLINE;
     QPointF begin_;
 
     unique_ptr<QGraphicsLineItem>  straight_line_item_ = nullptr;

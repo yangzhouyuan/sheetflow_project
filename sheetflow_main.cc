@@ -11,7 +11,7 @@
 #include <QMdiSubWindow>
 #include <QDebug>
 #include <QDockWidget>
-#include <canvas_scene.h>
+#include "canvas_body.h"
 struct impl_sheetflow_main
 {
     QMenuBar* menu;
@@ -120,11 +120,11 @@ void sheetflow_main::create_actions()
 
 canvas_view* sheetflow_main::create_canvas_body()
 {
-     auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
-     canvas_view* canva = canvas_view::make (scene.release()).release();
+     auto canva = canvas_view::make ();
+     auto ptr_canva = canva.get();
 
-     imp->mdiare->addSubWindow(canva);
-     return canva;
+     imp->mdiare->addSubWindow(canva.release ());
+     return ptr_canva;
 }
 
 void sheetflow_main::set_draw()
@@ -136,6 +136,9 @@ void sheetflow_main::set_draw()
     imp->draw_widget->setMinimumWidth (140);
 
     imp->drawer_->setWidget (imp->draw_widget.get ());
+
+    connect (imp->draw_widget.get(), &drag_widget::button_triggered, [] (const QString& text) { qDebug () << text; });
+
     imp->drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, imp->drawer_.get ());
 }
