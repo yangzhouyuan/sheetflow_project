@@ -74,7 +74,7 @@ unique_ptr<sheetflow_main> sheetflow_main::make()
 void sheetflow_main::file_new()
 {
     auto canva = create_canvas_body();
-//    imp->mdiare->addSubWindow(canva.get());
+
     canva->show();
 }
 
@@ -120,8 +120,8 @@ void sheetflow_main::create_actions()
 
 canvas_view* sheetflow_main::create_canvas_body()
 {
-     canvas_scene* scene = canvas_scene::make(QRectF (0, 0, 600, 500)).release();
-     canvas_view* canva = canvas_view::make (scene).release();
+     auto scene = canvas_scene::make(QRectF (0, 0, 600, 500));
+     canvas_view* canva = canvas_view::make (scene.release()).release();
 
      imp->mdiare->addSubWindow(canva);
      return canva;
