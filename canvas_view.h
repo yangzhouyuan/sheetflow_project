@@ -6,8 +6,6 @@
 #include <vector>
 #include <QGraphicsItem>
 #include "canvas_body.h"
-
-
 using std::make_unique;
 using std::unique_ptr;
 
