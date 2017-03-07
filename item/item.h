@@ -16,7 +16,6 @@ public:
 protected:
     explicit item(QGraphicsItem *parent = 0);
 protected:
-//    unique_ptr<impl_item> imp;
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;
     static constexpr qreal narrow_object_ratio_ = 1.2;

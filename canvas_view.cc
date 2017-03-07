@@ -7,6 +7,7 @@
 #include <QStyleOptionGraphicsItem>
 #include <QDebug>
 #include "item/broken_line.h"
+#include <QKeyEvent>
 
 canvas_view::draw_type canvas_view::return_type()
 {
@@ -84,6 +85,23 @@ bool canvas_view::init()
     return true;
 }
 
+void canvas_view::keyPressEvent(QKeyEvent *event)
+{
+    QGraphicsView::keyPressEvent(event);
+
+    if (event->modifiers() & Qt::CTRL and event->key() == Qt::Key_A)
+    {
+        select_allitems();
+        event->accept();
+    }
+
+    if (event->key() == Qt::Key_Delete)
+    {
+        delete_selected();
+        event->accept();
+    }
+}
+
 void canvas_view::mousePressEvent(QMouseEvent *event)
 {
     canvas_body::mousePressEvent (event);
@@ -101,8 +119,6 @@ void canvas_view::mousePressEvent(QMouseEvent *event)
     default:
         break;
     }
-
-
 
 }
 
@@ -214,6 +230,7 @@ void canvas_view::straightline_move_event(QMouseEvent *event)
     else
     {
         straight_line_item_->setLine(QLineF(begin_, pos));
+
     }
 }
 
@@ -224,7 +241,8 @@ void canvas_view::straightline_release_event(QMouseEvent *event)
     {
         return;
     }
-    graphics_.emplace_back (straight_line_item_.release());
+    scene()->addItem(straight_line_item_.release());
+//    graphics_.emplace_back (straight_line_item_.release());
 
     emit draw_finished();
 }
@@ -238,7 +256,6 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
 
         auto new_line = scene()->addLine({begin_point, begin_point});
         broken_lines_.emplace_back (new_line);
-
 
     }
     else if (event->buttons() == Qt::RightButton)
@@ -304,6 +321,23 @@ void canvas_view::brokenline_release_event(QMouseEvent *event)
     Q_UNUSED(event);
 }
 
+void canvas_view::select_allitems()
+{
+    const auto list = items ();
+    for (auto & item : list)
+    {
+        item->setSelected(true);
+    }
+}
+
+void canvas_view::delete_selected()
+{
+    for (auto & it : scene()->selectedItems())
+    {
+        delete it;
+    }
+}
+
 
 void canvas_view::drop_action(QDropEvent *event)
 {
@@ -318,9 +352,6 @@ void canvas_view::drop_action(QDropEvent *event)
     auto center_pos = scene_pos - rect_center;
     item->setPos(center_pos);
     scene ()->addItem(item.release());
-//    auto s = scene();
-//    qDebug() << s;
-//    s->addItem(item.release());
 
 }
 

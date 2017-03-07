@@ -40,6 +40,8 @@ protected:
     canvas_view(QWidget *parent = Q_NULLPTR): canvas_body (parent) { }
     canvas_view(QGraphicsScene *scene, QWidget *parent) : canvas_body (scene, parent) { }
 
+    void keyPressEvent (QKeyEvent* event) override;
+
     void mousePressEvent (QMouseEvent* event) override;
     void mouseMoveEvent (QMouseEvent* event) override;
     void mouseReleaseEvent (QMouseEvent* event) override;
@@ -59,6 +61,8 @@ private:
     void brokenline_move_event (QMouseEvent* event);
     void brokenline_release_event (QMouseEvent* event);
 private:
+    void select_allitems();
+    void delete_selected ();
     void drop_action (QDropEvent* event);
     template<typename ... ARGS>
     static unique_ptr<canvas_view> make_helper (ARGS && ... args)
