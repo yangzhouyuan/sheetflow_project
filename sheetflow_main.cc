@@ -58,11 +58,6 @@ bool sheetflow_main::init()
     return true;
 }
 
-void sheetflow_main::drag_button_status(const QString &status)
-{
-     Q_UNUSED(status);
-}
-
 sheetflow_main::~sheetflow_main()
 {
 }
@@ -131,6 +126,7 @@ canvas_view* sheetflow_main::create_canvas_body()
      auto ptr_canva = canva.get();
 
      connect (imp->draw_widget.get(), &drag_widget::button_triggered, ptr_canva, &canvas_view::set_type_string);
+     connect (ptr_canva, &canvas_view::draw_finished, imp->draw_widget.get(), &drag_widget::reset_status);
      imp->mdiare->addSubWindow(canva.release ());
      return ptr_canva;
 }
@@ -144,9 +140,6 @@ void sheetflow_main::set_draw()
     imp->draw_widget->setMinimumWidth (140);
 
     imp->drawer_->setWidget (imp->draw_widget.get ());
-
-//    connect (imp->draw_widget.get(), &drag_widget::button_triggered, [] (const QString& text) { qDebug () << text; });
-    connect (imp->draw_widget.get(), &drag_widget::button_triggered, this, &sheetflow_main::drag_button_status);
 
     imp->drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, imp->drawer_.get ());

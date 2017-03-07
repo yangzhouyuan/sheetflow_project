@@ -15,11 +15,15 @@ canvas_view::draw_type canvas_view::return_type()
 
 void canvas_view::set_type_string(const QString &type)
 {
-    if ( type == "连线1")
+    if (type == "原材料")
+    {
+        set_type(draw_type::RAWMATERIAL);
+    }
+    else if (type == "连线1")
     {
         set_type(draw_type::STRAIGHTLINE);
     }
-    else if ( type == "连线2")
+    else if (type == "连线2")
     {
         set_type(draw_type::BROKENLINE);
     }
@@ -85,6 +89,9 @@ void canvas_view::mousePressEvent(QMouseEvent *event)
     canvas_body::mousePressEvent (event);
     switch (return_type())
     {
+    case canvas_view::draw_type::RAWMATERIAL:
+        rawmaterial_press_event(event);
+        break;
     case canvas_view::draw_type::STRAIGHTLINE:
         straightline_press_event(event);
         break;
@@ -120,6 +127,9 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *event)
     canvas_body::mouseReleaseEvent (event);
     switch (return_type())
     {
+    case canvas_view::draw_type::RAWMATERIAL:
+        rawmaterial_release_event(event);
+        break;
     case canvas_view::draw_type::STRAIGHTLINE:
         straightline_release_event(event);
         break;
@@ -170,6 +180,19 @@ void canvas_view::dropEvent(QDropEvent *event)
 
 }
 
+void canvas_view::rawmaterial_press_event(QMouseEvent *event)
+{
+    begin_ = mapToScene (event->pos());
+    auto rawmaterial = raw_material::make(begin_);
+    scene()->addItem(rawmaterial.release());
+}
+
+void canvas_view::rawmaterial_release_event(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+    emit draw_finished();
+}
+
 void canvas_view::straightline_press_event(QMouseEvent *event)
 {
     begin_ = mapToScene (event->pos());
@@ -202,6 +225,8 @@ void canvas_view::straightline_release_event(QMouseEvent *event)
         return;
     }
     graphics_.emplace_back (straight_line_item_.release());
+
+    emit draw_finished();
 }
 
 void canvas_view::brokenline_press_event(QMouseEvent *event)
@@ -241,6 +266,8 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
         broke.release()->paint(&painter, &option, this);
 
         broken_lines_.clear();
+
+        emit draw_finished();
     }
 }
 

@@ -25,14 +25,12 @@ protected:
     explicit sheetflow_main(QWidget *parent = 0);
     bool init ();
 private:
-    void drag_button_status(const QString &);
     void create_toolbars ();
     void connections ();
     void create_actions ();
     void set_draw ();
     void set_mdiare ();
     void set_draw_widget_name ();
-//    static unique_ptr<canvas_view> create_canvas_body();
     canvas_view* create_canvas_body();
 private:
     unique_ptr<impl_sheetflow_main> imp;

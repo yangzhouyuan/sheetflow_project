@@ -16,11 +16,13 @@ public:
     enum class draw_type
     {
         NONE,
+        RAWMATERIAL,
         STRAIGHTLINE,
         BROKENLINE
     };
 signals:
     void type_changed (canvas_view::draw_type);
+    void draw_finished ();
 public:
     draw_type return_type ();
     void set_type_string (const QString & type);
@@ -30,7 +32,7 @@ public:
     static unique_ptr<canvas_view> make (QWidget *parent = nullptr) { return make_helper (parent); }
     static unique_ptr<canvas_view> make (QGraphicsScene *scene, QWidget *parent = nullptr)
     { return make_helper (scene, parent); }
-    ~canvas_view() override;
+    ~canvas_view() ;
 
 protected:
     bool init();
@@ -46,6 +48,9 @@ protected:
     void dragMoveEvent (QDragMoveEvent * event) override;
     void dropEvent (QDropEvent * event) override;
 private:
+    void rawmaterial_press_event (QMouseEvent* event);
+    void rawmaterial_release_event (QMouseEvent* event);
+
     void straightline_press_event (QMouseEvent* event);
     void straightline_move_event (QMouseEvent* event);
     void straightline_release_event (QMouseEvent* event);
