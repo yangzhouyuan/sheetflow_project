@@ -23,7 +23,7 @@ raw_material::raw_material(QPointF point)
 
 bool raw_material::init()
 {
-    this->setPlainText("双击输入文字或数字");
+    this->setPlainText("双击输入产品信息");
     return true;
 }
 

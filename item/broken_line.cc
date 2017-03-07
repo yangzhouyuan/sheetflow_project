@@ -1,6 +1,7 @@
 #include "broken_line.h"
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
+#include <QDebug>
 
 std::unique_ptr<broken_line> broken_line::make(QVector<QPointF> points)
 {
@@ -28,13 +29,15 @@ void broken_line::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
     item::paint(painter, option, widget);
 
+    const QColor color = option->state bitand QStyle::State_Selected ? selected_color() : Qt::black;
     auto the_pen = painter->pen();
     the_pen.setWidthF(0.01 * item_width_);
+    the_pen.setColor(color);
     painter->setPen(the_pen);
 
     painter->drawPolyline(return_points());
 
-    if (option->state & QStyle::State_Selected)
+    if (option->state bitand QStyle::State_Selected)
     {
         the_pen.setBrush(Qt::transparent);
         the_pen.setStyle(Qt::DashLine);

@@ -21,4 +21,7 @@ protected:
     static constexpr qreal narrow_object_ratio_ = 1.2;
     static constexpr qreal enlarge_object_ratio_ = 2;
     QString type_;
+    const QColor &  selected_color () { return  selected_color_ ; }
+private:
+    const QColor selected_color_ = Qt::red;
 };

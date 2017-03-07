@@ -1,6 +1,7 @@
 #include "checkout.h"
 #include <QInputDialog>
 #include <QPainter>
+#include <QStyleOptionGraphicsItem>
 
 unique_ptr<checkout> checkout::make(QPointF pos, QColor color)
 {
@@ -22,8 +23,9 @@ void checkout::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 {
     item::paint(painter, option, widget);
 
+    const QColor color = option->state bitand QStyle::State_Selected ? selected_color() : Qt::black;
     auto the_pen = painter->pen();
-    the_pen.setColor(Qt::black);
+    the_pen.setColor(color);
     the_pen.setWidthF(0.02 * item_width_);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);

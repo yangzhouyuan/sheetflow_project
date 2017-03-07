@@ -237,6 +237,7 @@ void canvas_view::straightline_move_event(QMouseEvent *event)
 void canvas_view::straightline_release_event(QMouseEvent *event)
 {
     Q_UNUSED(event);
+
     if(straight_line_item_ == nullptr)
     {
         return;

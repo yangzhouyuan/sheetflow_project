@@ -1,6 +1,7 @@
 #include "machining.h"
 #include <QPainter>
 #include <QInputDialog>
+#include <QStyleOptionGraphicsItem>
 
 unique_ptr<machining> machining::make(QPointF pos, QColor color)
 {
@@ -21,9 +22,10 @@ void machining::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
     item::paint(painter, option, widget);
 
+    const QColor color = option->state bitand QStyle::State_Selected ? selected_color() : Qt::black;
     painter->setFont(font_);
     auto the_pen = painter->pen();
-    the_pen.setColor(Qt::black);
+    the_pen.setColor(color);
     the_pen.setWidthF(0.02 * item_width_);
 
     painter->setPen(the_pen);

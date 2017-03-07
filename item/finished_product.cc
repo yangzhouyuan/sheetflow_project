@@ -1,6 +1,7 @@
 #include "finished_product.h"
 #include <QInputDialog>
 #include <QPainter>
+#include <QStyleOptionGraphicsItem>
 
 unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
 {
@@ -20,9 +21,10 @@ void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 {
     item::paint(painter, option, widget);
 
+    const QColor color = option->state bitand QStyle::State_Selected ? selected_color() : Qt::black;
     painter->setFont(font_);
     auto the_pen = painter->pen();
-    the_pen.setColor(Qt::black);
+    the_pen.setColor(color);
     the_pen.setWidthF(2.0);
     painter->setPen(the_pen);
     painter->setBrush(Qt::white);
