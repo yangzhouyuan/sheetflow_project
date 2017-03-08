@@ -48,11 +48,6 @@ void broken_line::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
-//QVector<QPointF> broken_line::return_points()
-//{
-//    return points_;
-//}
-
 QPainterPath broken_line::shape() const
 {
     QPainterPath path;

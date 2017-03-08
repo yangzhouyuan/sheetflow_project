@@ -2,77 +2,61 @@
 #include <QInputDialog>
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
+#include <QFocusEvent>
 
-unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
+unique_ptr<finished_product> finished_product::make(QPointF point)
 {
-    Q_UNUSED(color);
-    unique_ptr <finished_product> ret (new finished_product);
+    auto ret = unique_ptr <finished_product> (new finished_product(point));
 
-    ret->setPos(pos);
-    ret->type_ = "产成品";
+    if (ret == nullptr or !ret->init())
+    {
+        return nullptr;
+    }
+
+    ret->setPos(point);
+
     return ret;
 }
 
-finished_product::finished_product(item *parent)
+finished_product::finished_product(QPointF point)
 {
-    Q_UNUSED(parent);
+    this->setPlainText("产成品");
+}
+
+bool finished_product::init()
+{
+    setFlags(ItemIsMovable | ItemIsSelectable);
+    return true;
 }
 
 
 void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    item::paint(painter, option, widget);
+    QGraphicsTextItem::paint(painter, option, widget);
 
-    const QColor color = option->state bitand QStyle::State_Selected ? selected_color() : Qt::black;
-    painter->setFont(font_);
-    auto the_pen = painter->pen();
-    the_pen.setColor(color);
-    the_pen.setWidthF(2.0);
-    painter->setPen(the_pen);
-    painter->setBrush(Qt::white);
-    const QFontMetricsF metrics (painter->font());
-    auto text_size = metrics.size(Qt::TextWordWrap, product_info_);
-    auto text_w = text_size.width();
-    auto text_h = text_size.height();
-
-    const auto rect_w = std::max (item_width_ - 10, text_w + 10);
-    const auto rect_h = text_h + 10;
-
-    const QRectF rect (0, 0, rect_w, rect_h);
-    auto center = rect.center();
-
-    QRectF text_rect (center.x() - text_w / 2, center.y() - text_h / 2, text_w, text_h);
-
-    painter->drawRect(rect);
-    painter->drawText(text_rect, Qt::TextWordWrap, product_info_);
+    painter->drawRect(boundingRect());
 }
 
-void finished_product::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+void finished_product::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event)
 {
-    Q_UNUSED(event);
-    QInputDialog dlg;
-    dlg.setInputMode (QInputDialog::TextInput);
-    dlg.setLabelText("产品信息");
-    dlg.setTextValue (product_info_);
+    QGraphicsTextItem::mouseDoubleClickEvent(event);
 
-    auto action = dlg.exec();
-    if (action == QInputDialog::Rejected)
+    if (textInteractionFlags() == Qt::NoTextInteraction)
     {
-        return;
+        setTextInteractionFlags(Qt::TextEditorInteraction);
     }
-
-    product_info_ = dlg.textValue();
 }
 
-QRectF finished_product::boundingRect() const
+void finished_product::focusOutEvent(QFocusEvent* event)
 {
-    const QFontMetricsF metrics (font_);
-    auto text_size = metrics.size(Qt::TextWordWrap, product_info_);
-    auto text_w = text_size.width();
-    auto text_h = text_size.height();
+    QGraphicsTextItem::focusOutEvent(event);
+    setTextInteractionFlags(Qt::NoTextInteraction);
 
-    auto rect_w = std::max (item_width_ - 10, text_w + 10);
-    auto rect_h = text_h + 10;
-
-    return QRectF (0, 0, rect_w, rect_h);
+    if (this->toPlainText().trimmed().isEmpty())
+    {
+        deleteLater();
+    }
 }
+
+

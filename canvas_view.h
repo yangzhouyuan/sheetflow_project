@@ -16,6 +16,7 @@ public:
     enum class draw_type
     {
         NONE,
+        FINISHEDPRODUCTED,
         RAWMATERIAL,
         STRAIGHTLINE,
         BROKENLINE
@@ -50,6 +51,9 @@ protected:
     void dragMoveEvent (QDragMoveEvent * event) override;
     void dropEvent (QDropEvent * event) override;
 private:
+    void finished_product_press_event (QMouseEvent* event);
+    void finished_product_release_event (QMouseEvent* event);
+
     void rawmaterial_press_event (QMouseEvent* event);
     void rawmaterial_release_event (QMouseEvent* event);
 

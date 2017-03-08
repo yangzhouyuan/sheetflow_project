@@ -1,21 +1,21 @@
 #pragma once
-#include "item/item.h"
+#include <QGraphicsTextItem>
 #include <QFont>
+#include <memory>
 
-class finished_product : public item
+using std::unique_ptr;
+class finished_product : public QGraphicsTextItem
 {
 public:
-    static unique_ptr<finished_product> make (QPointF pos, QColor color = Qt::black);
+    static unique_ptr<finished_product> make (QPointF point);
 protected:
-    finished_product(item* parent = nullptr);
+    finished_product(QPointF point);
     bool init();
     void paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override;
-    QRectF boundingRect () const override;
+    void focusOutEvent (QFocusEvent* event) override;
     QString type_;
-private:
-    QString product_info_ ;
-    QFont font_;
+
 };
 
 

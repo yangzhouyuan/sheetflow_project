@@ -9,6 +9,7 @@
 #include "item/broken_line.h"
 #include <QKeyEvent>
 #include "item/straight_line.h"
+#include "item/finished_product.h"
 
 canvas_view::draw_type canvas_view::return_type()
 {
@@ -17,7 +18,11 @@ canvas_view::draw_type canvas_view::return_type()
 
 void canvas_view::set_type_string(const QString &type)
 {
-    if (type == "原材料")
+    if (type == "产成品")
+    {
+        set_type(draw_type::FINISHEDPRODUCTED);
+    }
+    else if (type == "原材料")
     {
         set_type(draw_type::RAWMATERIAL);
     }
@@ -108,6 +113,9 @@ void canvas_view::mousePressEvent(QMouseEvent *event)
     canvas_body::mousePressEvent (event);
     switch (return_type())
     {
+    case canvas_view::draw_type::FINISHEDPRODUCTED:
+        finished_product_press_event(event);
+        break;
     case canvas_view::draw_type::RAWMATERIAL:
         rawmaterial_press_event(event);
         break;
@@ -144,6 +152,9 @@ void canvas_view::mouseReleaseEvent(QMouseEvent *event)
     canvas_body::mouseReleaseEvent (event);
     switch (return_type())
     {
+    case canvas_view::draw_type::FINISHEDPRODUCTED:
+        finished_product_release_event(event);
+        break;
     case canvas_view::draw_type::RAWMATERIAL:
         rawmaterial_release_event(event);
         break;
@@ -195,6 +206,19 @@ void canvas_view::dropEvent(QDropEvent *event)
         canvas_body::dropEvent(event);
     }
 
+}
+
+void canvas_view::finished_product_press_event(QMouseEvent *event)
+{
+    begin_ = mapToScene (event->pos());
+    auto finished_product = finished_product::make(begin_);
+    scene()->addItem(finished_product.release());
+}
+
+void canvas_view::finished_product_release_event(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+    emit draw_finished();
 }
 
 void canvas_view::rawmaterial_press_event(QMouseEvent *event)

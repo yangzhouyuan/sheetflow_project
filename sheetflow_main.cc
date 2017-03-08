@@ -157,8 +157,8 @@ void sheetflow_main::set_mdiare()
 
 void sheetflow_main::set_draw_widget_name()
 {
-    std::vector<QString>  labels = {"加工", "检验", "产成品"};
-    std::vector<QString> buttons = {"原材料", "连线1", "连线2"};
+    std::vector<QString>  labels = {"加工", "检验"};
+    std::vector<QString> buttons = {"产成品","原材料", "连线1", "连线2"};
      imp->draw_widget =drag_widget::make(labels, buttons);
 
 }
