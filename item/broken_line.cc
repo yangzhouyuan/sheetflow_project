@@ -35,7 +35,7 @@ void broken_line::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     the_pen.setColor(color);
     painter->setPen(the_pen);
 
-    painter->drawPolyline(return_points());
+    painter->drawPolyline(points_);
 
     if (option->state bitand QStyle::State_Selected)
     {
@@ -48,10 +48,10 @@ void broken_line::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
-QVector<QPointF> broken_line::return_points()
-{
-    return points_;
-}
+//QVector<QPointF> broken_line::return_points()
+//{
+//    return points_;
+//}
 
 QPainterPath broken_line::shape() const
 {

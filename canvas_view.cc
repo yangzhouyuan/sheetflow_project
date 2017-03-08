@@ -8,6 +8,7 @@
 #include <QDebug>
 #include "item/broken_line.h"
 #include <QKeyEvent>
+#include "item/straight_line.h"
 
 canvas_view::draw_type canvas_view::return_type()
 {
@@ -242,7 +243,11 @@ void canvas_view::straightline_release_event(QMouseEvent *event)
     {
         return;
     }
-    scene()->addItem(straight_line_item_.release());
+
+    auto pos = mapToScene(event->pos());
+    auto straight = straight_line::make(begin_, pos);
+    scene()->addItem(straight.release());
+//    scene()->addItem(straight_line_item_.release());
 //    graphics_.emplace_back (straight_line_item_.release());
 
     emit draw_finished();
@@ -278,12 +283,7 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
 
         auto broke = broken_line::make (points);
 
-        scene()->addItem(broke.get());
-//        QPainter painter;
-//        QStyleOptionGraphicsItem option;
-//        broke.release()->paint(&painter, &option, this);
-
-        broken_lines_.clear();
+        scene()->addItem(broke.release());
 
         emit draw_finished();
     }
