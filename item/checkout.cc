@@ -66,7 +66,14 @@ void checkout::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     checkout_info_ = dlg.textValue();
 }
 
-//QRectF checkout::boundingRect() const
-//{
-//    return {};
-//}
+QPainterPath checkout::shape() const
+{
+    QPainterPath path;
+
+    const QRectF rect (0.3 * item_width_, item_height_ * 20 / 80, 0.45 * item_width_, item_height_ * 45 / 80);
+
+    path.addRect(rect);
+
+    return path;
+}
+

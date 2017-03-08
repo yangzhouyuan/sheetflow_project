@@ -13,7 +13,7 @@ public:
     QRectF boundingRect () const override;
     void paint (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) override;
     QVector<QPointF> return_points();
-
+    QPainterPath shape () const override;
 private:
     broken_line (QVector<QPointF> points);
     bool init();

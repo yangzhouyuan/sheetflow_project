@@ -53,6 +53,18 @@ QVector<QPointF> broken_line::return_points()
     return points_;
 }
 
+QPainterPath broken_line::shape() const
+{
+    QPainterPath path;
+
+    for (auto & it : points_)
+    {
+        path.lineTo(it);
+    }
+
+    return path;
+}
+
 
 broken_line::broken_line(QVector<QPointF> points)
 {

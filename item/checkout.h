@@ -10,7 +10,7 @@ protected:
     checkout(item* parent = nullptr);
     void paint (QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override;
-//    QRectF boundingRect () const override;
+    QPainterPath shape () const override;
 private:
     QString checkout_info_;
     QFont font_;

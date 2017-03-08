@@ -64,3 +64,12 @@ void machining::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
     machining_info_ = dlg.textValue();
 
 }
+
+QPainterPath machining::shape() const
+{
+    QPainterPath path;
+    const QRectF rect (0.3 * item_width_, item_height_ * 20 / 80, 0.5 * item_width_, item_height_ * 50 / 80);
+    path.addEllipse(rect);
+
+    return path;
+}

@@ -279,9 +279,9 @@ void canvas_view::brokenline_press_event(QMouseEvent *event)
         auto broke = broken_line::make (points);
 
         scene()->addItem(broke.get());
-        QPainter painter;
-        QStyleOptionGraphicsItem option;
-        broke.release()->paint(&painter, &option, this);
+//        QPainter painter;
+//        QStyleOptionGraphicsItem option;
+//        broke.release()->paint(&painter, &option, this);
 
         broken_lines_.clear();
 
