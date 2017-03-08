@@ -44,6 +44,11 @@ void drag_widget::reset_status()
     emit button_triggered("");
 }
 
+QString drag_widget::status()
+{
+    return status_;
+}
+
 drag_widget::~drag_widget()
 {
 
@@ -93,6 +98,8 @@ bool drag_widget::init()
         technics_label->setAlignment(Qt::AlignHCenter);
         v_layout->addWidget (technics_label.release());
     }
+
+    connect (this, &drag_widget::button_triggered, [this] (const QString& s) { status_ = s; });
     return true;
 }
 

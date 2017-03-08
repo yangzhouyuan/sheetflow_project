@@ -6,7 +6,8 @@
 unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
 {
     Q_UNUSED(color);
-    unique_ptr <finished_product> ret(new finished_product);
+    unique_ptr <finished_product> ret (new finished_product);
+
     ret->setPos(pos);
     ret->type_ = "产成品";
     return ret;
@@ -16,6 +17,7 @@ finished_product::finished_product(item *parent)
 {
     Q_UNUSED(parent);
 }
+
 
 void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {

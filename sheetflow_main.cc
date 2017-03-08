@@ -127,6 +127,7 @@ canvas_view* sheetflow_main::create_canvas_body()
 
      connect (imp->draw_widget.get(), &drag_widget::button_triggered, ptr_canva, &canvas_view::set_type_string);
      connect (ptr_canva, &canvas_view::draw_finished, imp->draw_widget.get(), &drag_widget::reset_status);
+     ptr_canva->set_type_string(imp->draw_widget->status());
      imp->mdiare->addSubWindow(canva.release ());
      return ptr_canva;
 }
