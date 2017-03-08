@@ -221,7 +221,23 @@ void canvas_view::straightline_move_event(QMouseEvent *event)
     {
         return;
     }
-    const auto pos = mapToScene(event->pos());
+
+    const auto current_pos = mapToScene(event->pos());
+    const auto mouse_line = QLineF (begin_, current_pos);
+    const auto angle = mouse_line.angle();
+
+    QPointF new_pos;
+
+    if ((angle < 180 - 45 and angle > 45 + 0) or (angle > 180 + 45 and angle < 360 - 45))
+    {
+        new_pos = QPointF(begin_.x(), current_pos.y());
+    }
+    else
+    {
+        new_pos = QPointF(current_pos.x(), begin_.y());
+    }
+
+    const auto pos = new_pos;
 
     if( straight_line_item_ == nullptr)
     {
@@ -244,11 +260,26 @@ void canvas_view::straightline_release_event(QMouseEvent *event)
         return;
     }
 
-    auto pos = mapToScene(event->pos());
+    const auto current_pos = mapToScene(event->pos());
+    const auto mouse_line = QLineF (begin_, current_pos);
+    const auto angle = mouse_line.angle();
+
+    QPointF new_pos;
+
+    if ((angle < 180 - 45 and angle > 45 + 0) or (angle > 180 + 45 and angle < 360 - 45))
+    {
+        new_pos = QPointF(begin_.x(), current_pos.y());
+    }
+    else
+    {
+        new_pos = QPointF(current_pos.x(), begin_.y());
+    }
+
+    const auto pos = new_pos;
+
     auto straight = straight_line::make(begin_, pos);
+
     scene()->addItem(straight.release());
-//    scene()->addItem(straight_line_item_.release());
-//    graphics_.emplace_back (straight_line_item_.release());
 
     emit draw_finished();
 }

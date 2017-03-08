@@ -43,8 +43,6 @@ void finished_product::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 
     painter->drawRect(rect);
     painter->drawText(text_rect, Qt::TextWordWrap, product_info_);
-
-    //painter->drawRect(QRectF(0.07 * item_width_, item_height_ * 25 / 80, 0.85 * item_width_, item_height_ * 30 / 80));
 }
 
 void finished_product::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
