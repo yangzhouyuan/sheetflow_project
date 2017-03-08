@@ -58,6 +58,5 @@ broken_line::broken_line(QVector<QPointF> points)
 
 bool broken_line::init()
 {
-    set_attribute("123");
     return true;
 }

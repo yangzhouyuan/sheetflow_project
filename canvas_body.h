@@ -9,7 +9,7 @@ public:
     static unique_ptr<canvas_body> make (QWidget *parent = nullptr) { return make_helper (parent); }
     static unique_ptr<canvas_body> make (QGraphicsScene *scene, QWidget *parent = nullptr)
     { return make_helper (scene, parent); }
-
+     unique_ptr<canvas_scene> scene_ = canvas_scene::make (QRectF{0, 0, 600, 500});
 
 protected:
     bool init();
@@ -28,7 +28,7 @@ private:
         return ret;
     }
 private:
-    unique_ptr<canvas_scene> scene_ = canvas_scene::make (QRectF{0, 0, 600, 500});
+
     //canvas_scene canvas_scene_;
 
 };

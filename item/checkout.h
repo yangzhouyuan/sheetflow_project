@@ -15,7 +15,7 @@ private:
     QString checkout_info_;
   //  item item_;
     QFont font_;
-    void attribute ();
+    //void attribute ();
 };
 
 

@@ -33,13 +33,15 @@ public:
     static unique_ptr<canvas_view> make (QGraphicsScene *scene, QWidget *parent = nullptr)
     { return make_helper (scene, parent); }
     ~canvas_view() override;
-    void sender_singnal();
+
+    void sender_singnal(bool ok);
 
 protected:
     bool init();
-
     canvas_view(QWidget *parent = Q_NULLPTR): canvas_body (parent) { }
     canvas_view(QGraphicsScene *scene, QWidget *parent) ;
+
+
 
     void mousePressEvent (QMouseEvent* event) override;
     void mouseMoveEvent (QMouseEvent* event) override;
@@ -78,10 +80,6 @@ private:
     std::vector<unique_ptr<QGraphicsLineItem>> broken_lines_;
 
     std::vector<QGraphicsItem*> graphics_;
-    canvas_scene canvas_scene_;
-
-
-
 };
 
 

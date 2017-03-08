@@ -8,10 +8,9 @@ unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
     unique_ptr <finished_product> ret(new finished_product);
     ret->setPos(pos);
     ret->type_ = "产成品";
-    item item_;
-    item_.set_attribute("名称");
-    item_.set_attribute("数量");
-    item_.set_attribute("型号");
+    ret->set_attribute("名称");
+    ret->set_attribute("数量");
+    ret->set_attribute("型号");
     return ret;
 }
 

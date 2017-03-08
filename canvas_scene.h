@@ -2,6 +2,7 @@
 #include <QGraphicsScene>
 #include <memory>
 #include <item/item.h>
+#include <QMap>
 
 using std::unique_ptr;
 using std::make_unique;
@@ -25,7 +26,7 @@ public:
 
     template<typename ... ARGS>
     canvas_scene (ARGS && ... args) : QGraphicsScene (std::forward<ARGS> (args)...) {}
-    QMap<QString,QString> selete_item_attriute();
+    QMap<QString, QString>attribute_map();
 signals:
    void selete_change(bool);
 
@@ -37,7 +38,8 @@ protected:
     void drawBackground(QPainter *painter, const QRectF &rect) override;
     void drawForeground(QPainter *painter, const QRectF &rect) override;
 private:
-    void report_seletion();
+    void item_seleted();
+
 
 
 };

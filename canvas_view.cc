@@ -20,6 +20,8 @@ void canvas_view::set_type_string(const QString &type)
  canvas_view::canvas_view(QGraphicsScene *scene, QWidget *parent)
      :canvas_body(scene, parent)
  {
+
+
  }
 
 void canvas_view::set_type(canvas_view::draw_type t)
@@ -35,7 +37,14 @@ void canvas_view::set_type(canvas_view::draw_type t)
 
 QMap<QString, QString> canvas_view::selete_item_data()
 {
-   return canvas_scene_.selete_item_attriute();
+    auto map = scene_->attribute_map();
+    QMap<QString, QString>::const_iterator iter;
+    for(iter = map.cbegin(); iter != map.cend(); ++iter)
+    {
+
+        qDebug() << iter.key() + "1" << ":" << iter.value() + "1";
+    }
+   return scene_->attribute_map();
 }
 
 //QPixmap canvas_view::pixmap()
@@ -58,10 +67,20 @@ canvas_view::~canvas_view()
 
 }
 
-void canvas_view::sender_singnal()
+void canvas_view::sender_singnal(bool ok)
 {
-    qDebug() << "sender_signal";
-    emit selete_change(true);
+    qDebug() << "进来了发送函数";
+    if(ok == true)
+    {
+        qDebug() << "sender_signal";
+        emit selete_change(true);
+
+    }
+    else
+    {
+        qDebug() << "no sender_signal";
+        emit selete_change(false);
+    }
 
 }
 
@@ -82,8 +101,7 @@ bool canvas_view::init()
         broken_lines_.clear();
     });
 
-    connect(&canvas_scene_, &canvas_scene::selete_change, this, &canvas_view::sender_singnal);
-
+    connect(scene_.get(), &canvas_scene::selete_change, this, &canvas_view::sender_singnal);
 
     return true;
 }

@@ -57,7 +57,7 @@ bool sheetflow_main::init()
     connections ();
     set_draw_widget_name();
     set_draw();
-    //set_attribute();
+    set_attribute();
     return true;
 }
 
@@ -137,23 +137,28 @@ canvas_view* sheetflow_main::create_canvas_body()
 void sheetflow_main::notify_attribute(bool ok)
 {
     qDebug() << "notify";
-    imp->attribute_->setWidget (nullptr);
-    if (!ok)
+    imp->attribute_->setWidget(nullptr);
+    if(!ok)
     {
         return;
     }
-    auto active_canvas =actvite_body();
-    if(active_canvas == nullptr)
+    auto activite_canvas = actvite_body();///是否有活动窗口
+    if(activite_canvas == nullptr)
     {
         return;
     }
-    auto attribute_map = active_canvas->selete_item_data();
-    if(active_canvas == nullptr)
+    auto attribute_map = activite_canvas->selete_item_data();///返回活动窗口里面item的属性
+    QMap <QString, QString>::const_iterator iter;
+    for(iter =attribute_map.cbegin();iter != attribute_map.cend();iter ++)
+    {
+        qDebug() << iter.key() + "::"+ "22" << "::" << iter.value() +":" + "22";
+    }
+    if(attribute_map.size() == 0)
     {
         return;
     }
-    imp->attribute_content_ =attribute::make(attribute_map);
-    set_attribute();
+   imp->attribute_content_ = attribute::make(attribute_map);//把获取到的数据传到属性类去创建widget
+   set_attribute_window();
 }
 
 
@@ -178,6 +183,21 @@ void sheetflow_main::set_attribute()
     imp->attribute_->setMinimumWidth(250);
     imp->attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
     addDockWidget (Qt::RightDockWidgetArea, imp->attribute_.get ());
+
+
+}
+
+void sheetflow_main::set_attribute_window()
+{
+     imp->attribute_->setWidget (imp->attribute_content_.get());
+     if (imp->attribute_->isHidden())
+     {
+         imp->attribute_->show();
+     }
+     else
+     {
+         imp->attribute_->isHidden();
+     }
 
 
 }

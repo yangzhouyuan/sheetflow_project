@@ -36,6 +36,7 @@ private:
     void notify_attribute (bool ok);
     canvas_view* actvite_body ();
     void set_attribute ();
+    void set_attribute_window ();
 private:
     unique_ptr<impl_sheetflow_main> imp;
 

@@ -4,7 +4,7 @@
 #include <QDebug>
 bool canvas_scene::init()
 {
-    connect (this, &canvas_scene::selectionChanged, [this] { report_seletion (); });
+    connect (this, &canvas_scene::selectionChanged, this, &canvas_scene::item_seleted);
     setBackgroundBrush(QColor (230, 230, 230));
     return true;
 }
@@ -24,28 +24,40 @@ void canvas_scene::drawForeground(QPainter *painter, const QRectF &rect)
     painter->drawRect(QRectF (5, 5, 595, 495));
 }
 
-void canvas_scene::report_seletion()
+void canvas_scene::item_seleted()
 {
     qDebug() << "scene有item被点击";
     if (selectedItems ().size () == 1)
     {
-        emit selete_change(true);
         qDebug() <<"true1";
+        emit selete_change(true);
+
     }
     else
     {
-        qDebug() <<"false";
+
         emit selete_change(false);
+        qDebug() <<"false";
     }
 
+}
+
+QMap<QString, QString> canvas_scene::attribute_map()
+{
+    QMap<QString, QString> map_;
+    map_.insert("echo","echo");
+    map_.insert("123","345");
+    map_.insert("234","333");
+    map_.insert("xixi","x");
+    QMap<QString, QString>::const_iterator iter ;
+    for (iter = map_.cbegin(); iter != map_.cend(); ++iter)
+    {
+        qDebug() << iter.key()<< ":" << iter.value();
+    }
+    return map_;
 }
 
 canvas_scene::~canvas_scene()
 {
-}
-
-QMap<QString, QString> canvas_scene::selete_item_attriute()
-{
-
 }
 
