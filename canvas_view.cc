@@ -17,6 +17,10 @@ void canvas_view::set_type_string(const QString &type)
 {
 
 }
+ canvas_view::canvas_view(QGraphicsScene *scene, QWidget *parent)
+     :canvas_body(scene, parent)
+ {
+ }
 
 void canvas_view::set_type(canvas_view::draw_type t)
 {
@@ -27,6 +31,11 @@ void canvas_view::set_type(canvas_view::draw_type t)
 
     type_ = t;
     emit type_changed(t);
+}
+
+QMap<QString, QString> canvas_view::selete_item_data()
+{
+   return canvas_scene_.selete_item_attriute();
 }
 
 //QPixmap canvas_view::pixmap()
@@ -49,6 +58,13 @@ canvas_view::~canvas_view()
 
 }
 
+void canvas_view::sender_singnal()
+{
+    qDebug() << "sender_signal";
+    emit selete_change(true);
+
+}
+
 bool canvas_view::init()
 {
     if (canvas_body::init () == false)
@@ -59,12 +75,15 @@ bool canvas_view::init()
     setViewportUpdateMode(FullViewportUpdate);
     setMouseTracking(true);
     setRenderHints (QPainter::Antialiasing);
-
+   qDebug() << "view init";
     connect (this, &canvas_view::type_changed, [this] (auto && )
     {
         straight_line_item_ = nullptr;
         broken_lines_.clear();
     });
+
+    connect(&canvas_scene_, &canvas_scene::selete_change, this, &canvas_view::sender_singnal);
+
 
     return true;
 }

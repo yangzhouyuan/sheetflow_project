@@ -1,6 +1,7 @@
-#pragma once
+﻿#pragma once
 #include <QGraphicsScene>
 #include <memory>
+#include <item/item.h>
 
 using std::unique_ptr;
 using std::make_unique;
@@ -8,6 +9,7 @@ using std::make_unique;
 
 class canvas_scene : public QGraphicsScene
 {
+    Q_OBJECT
 public:
     template<typename ... ARGS>
     static unique_ptr<canvas_scene> make (ARGS && ... args)
@@ -19,15 +21,24 @@ public:
         }
         return ret;
     }
+     virtual ~canvas_scene();
 
-    virtual ~canvas_scene();
-protected:
     template<typename ... ARGS>
     canvas_scene (ARGS && ... args) : QGraphicsScene (std::forward<ARGS> (args)...) {}
+    QMap<QString,QString> selete_item_attriute();
+signals:
+   void selete_change(bool);
+
+
+protected:
+
     bool init ();
 
     void drawBackground(QPainter *painter, const QRectF &rect) override;
     void drawForeground(QPainter *painter, const QRectF &rect) override;
+private:
+    void report_seletion();
+
 
 };
 

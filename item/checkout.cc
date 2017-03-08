@@ -1,4 +1,4 @@
-#include "checkout.h"
+﻿#include "checkout.h"
 #include <QInputDialog>
 #include <QPainter>
 
@@ -8,6 +8,10 @@ unique_ptr<checkout> checkout::make(QPointF pos, QColor color)
     unique_ptr <checkout> ret(new checkout);
     ret->setPos(pos);
     ret->type_ = "加工";
+    item item_;
+    item_.set_attribute("序号");
+    item_.set_attribute("名称");
+    item_.set_attribute("设备");
     return ret;
 }
 

@@ -1,6 +1,6 @@
-#include "raw_material.h"
+﻿#include "raw_material.h"
 #include <QGraphicsSceneMouseEvent>
-
+///原材料
 std::unique_ptr<raw_material> raw_material::make(QPointF point)
 {
     auto ret = std::unique_ptr<raw_material> ( new raw_material (point));

@@ -1,7 +1,7 @@
-#include "broken_line.h"
+﻿#include "broken_line.h"
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
-
+///连线2
 std::unique_ptr<broken_line> broken_line::make(QVector<QPointF> points)
 {
     auto ret = std::unique_ptr<broken_line> (new broken_line (points));
@@ -58,5 +58,6 @@ broken_line::broken_line(QVector<QPointF> points)
 
 bool broken_line::init()
 {
+    set_attribute("123");
     return true;
 }

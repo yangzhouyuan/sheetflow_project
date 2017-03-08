@@ -21,22 +21,25 @@ public:
     };
 signals:
     void type_changed (canvas_view::draw_type);
+    void selete_change(bool);
 public:
     draw_type return_type ();
     void set_type_string (const QString & type);
     void set_type (draw_type t);
+    QMap<QString, QString> selete_item_data();
 //    QPixmap pixmap ();
 public:
     static unique_ptr<canvas_view> make (QWidget *parent = nullptr) { return make_helper (parent); }
     static unique_ptr<canvas_view> make (QGraphicsScene *scene, QWidget *parent = nullptr)
     { return make_helper (scene, parent); }
     ~canvas_view() override;
+    void sender_singnal();
 
 protected:
     bool init();
 
     canvas_view(QWidget *parent = Q_NULLPTR): canvas_body (parent) { }
-    canvas_view(QGraphicsScene *scene, QWidget *parent) : canvas_body (scene, parent) { }
+    canvas_view(QGraphicsScene *scene, QWidget *parent) ;
 
     void mousePressEvent (QMouseEvent* event) override;
     void mouseMoveEvent (QMouseEvent* event) override;
@@ -75,7 +78,7 @@ private:
     std::vector<unique_ptr<QGraphicsLineItem>> broken_lines_;
 
     std::vector<QGraphicsItem*> graphics_;
-
+    canvas_scene canvas_scene_;
 
 
 

@@ -1,4 +1,4 @@
-#include "machining.h"
+﻿#include "machining.h"
 #include <QPainter>
 #include <QInputDialog>
 
@@ -7,6 +7,10 @@ unique_ptr<machining> machining::make(QPointF pos, QColor color)
     unique_ptr <machining> ret(new machining);
     ret->setPos(pos);
     ret->type_ = "加工";
+    item item_;
+    item_.set_attribute("序号");
+    item_.set_attribute("名称");
+    item_.set_attribute("设备");
     return ret;
 }
 

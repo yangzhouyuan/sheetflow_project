@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "item/item.h"
 #include <QFont>
 
@@ -13,7 +13,9 @@ protected:
 //    QRectF boundingRect () const override;
 private:
     QString checkout_info_;
+  //  item item_;
     QFont font_;
+    void attribute ();
 };
 
 

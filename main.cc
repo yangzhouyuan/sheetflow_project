@@ -10,7 +10,6 @@
 
 int main(int argc, char *argv[])
 {
-    qDebug () << "123";
     QApplication a(argc, argv);
 
     auto wm = sheetflow_main::make();

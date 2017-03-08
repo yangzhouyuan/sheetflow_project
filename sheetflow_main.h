@@ -33,6 +33,9 @@ private:
     void set_draw_widget_name ();
 //    static unique_ptr<canvas_view> create_canvas_body();
     canvas_view* create_canvas_body();
+    void notify_attribute (bool ok);
+    canvas_view* actvite_body ();
+    void set_attribute ();
 private:
     unique_ptr<impl_sheetflow_main> imp;
 

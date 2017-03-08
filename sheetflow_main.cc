@@ -12,6 +12,7 @@
 #include <QDebug>
 #include <QDockWidget>
 #include "canvas_body.h"
+#include <attribute.h>
 struct impl_sheetflow_main
 {
     QMenuBar* menu;
@@ -35,6 +36,9 @@ struct impl_sheetflow_main
     std::unique_ptr<QDockWidget> drawer_ = std::make_unique<QDockWidget>();
     std::unique_ptr<drag_widget> draw_widget;
 
+    std::unique_ptr<QDockWidget> attribute_ = std::make_unique<QDockWidget>();
+    std::unique_ptr<attribute> attribute_content_;
+
     QMdiArea* mdiare = new QMdiArea();
 };
 
@@ -53,6 +57,7 @@ bool sheetflow_main::init()
     connections ();
     set_draw_widget_name();
     set_draw();
+    //set_attribute();
     return true;
 }
 
@@ -123,8 +128,58 @@ canvas_view* sheetflow_main::create_canvas_body()
      auto canva = canvas_view::make ();
      auto ptr_canva = canva.get();
 
+     connect(ptr_canva, &canvas_view::selete_change, this, &sheetflow_main::notify_attribute);
+
      imp->mdiare->addSubWindow(canva.release ());
      return ptr_canva;
+}
+
+void sheetflow_main::notify_attribute(bool ok)
+{
+    qDebug() << "notify";
+    imp->attribute_->setWidget (nullptr);
+    if (!ok)
+    {
+        return;
+    }
+    auto active_canvas =actvite_body();
+    if(active_canvas == nullptr)
+    {
+        return;
+    }
+    auto attribute_map = active_canvas->selete_item_data();
+    if(active_canvas == nullptr)
+    {
+        return;
+    }
+    imp->attribute_content_ =attribute::make(attribute_map);
+    set_attribute();
+}
+
+
+canvas_view *sheetflow_main::actvite_body()
+{
+    if(QMdiSubWindow *active_subwindow = imp->mdiare->activeSubWindow())
+    {
+        canvas_view* canvas_ptr = dynamic_cast<canvas_view*>(active_subwindow->widget());
+        //assert (canvas_ptr);
+        return canvas_ptr;
+    }
+    else
+    {
+        return nullptr;
+    }
+
+}
+
+void sheetflow_main::set_attribute()
+{
+    imp->attribute_->setMaximumWidth(250);
+    imp->attribute_->setMinimumWidth(250);
+    imp->attribute_->setAllowedAreas (Qt::RightDockWidgetArea);
+    addDockWidget (Qt::RightDockWidgetArea, imp->attribute_.get ());
+
+
 }
 
 void sheetflow_main::set_draw()
