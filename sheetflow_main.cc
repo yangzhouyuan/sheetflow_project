@@ -12,7 +12,12 @@
 #include <QDebug>
 #include <QDockWidget>
 #include "canvas_body.h"
+//<<<<<<< HEAD
 #include <attribute.h>
+//=======
+#include <QPushButton>
+
+//>>>>>>> spong2
 struct impl_sheetflow_main
 {
     QMenuBar* menu;
@@ -130,6 +135,10 @@ canvas_view* sheetflow_main::create_canvas_body()
 
      connect(ptr_canva, &canvas_view::selete_change, this, &sheetflow_main::notify_attribute);
 
+
+     connect (imp->draw_widget.get(), &drag_widget::button_triggered, ptr_canva, &canvas_view::set_type_string);
+     connect (ptr_canva, &canvas_view::draw_finished, imp->draw_widget.get(), &drag_widget::reset_status);
+     ptr_canva->set_type_string(imp->draw_widget->status());
      imp->mdiare->addSubWindow(canva.release ());
      return ptr_canva;
 }
@@ -207,8 +216,6 @@ void sheetflow_main::set_draw()
 
     imp->drawer_->setWidget (imp->draw_widget.get ());
 
-    connect (imp->draw_widget.get(), &drag_widget::button_triggered, [] (const QString& text) { qDebug () << text; });
-
     imp->drawer_->setAllowedAreas (Qt::LeftDockWidgetArea);
     addDockWidget (Qt::LeftDockWidgetArea, imp->drawer_.get ());
 }
@@ -224,8 +231,8 @@ void sheetflow_main::set_mdiare()
 
 void sheetflow_main::set_draw_widget_name()
 {
-    std::vector<QString>  labels = {"加工", "检验", "产成品"};
-    std::vector<QString> buttons = {"原材料", "连线1", "连线2"};
+    std::vector<QString>  labels = {"加工", "检验"};
+    std::vector<QString> buttons = {"产成品","原材料", "连线1", "连线2"};
      imp->draw_widget =drag_widget::make(labels, buttons);
 
 }

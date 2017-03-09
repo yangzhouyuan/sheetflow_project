@@ -15,6 +15,7 @@ QMap<QString, QString> item::return_attriute()
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+    Q_UNUSED(option);
     painter->setPen(Qt::black);
 }
 

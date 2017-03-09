@@ -6,6 +6,7 @@
 #include <QMdiArea>
 #include <QDockWidget>
 #include "drag_widget.h"
+
 using std::unique_ptr;
 
 namespace Ui {
@@ -31,7 +32,6 @@ private:
     void set_draw ();
     void set_mdiare ();
     void set_draw_widget_name ();
-//    static unique_ptr<canvas_view> create_canvas_body();
     canvas_view* create_canvas_body();
     void notify_attribute (bool ok);
     canvas_view* actvite_body ();

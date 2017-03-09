@@ -19,6 +19,7 @@ public:
                                          std::vector<QString> buttons = {},
                                          QWidget* parent = nullptr);
     void reset_status ();
+    QString status ();
     virtual ~drag_widget () override;
 protected:
     explicit drag_widget(std::vector<QString> labels, std::vector<QString> buttons,  QWidget *parent = 0);
@@ -29,6 +30,7 @@ private:
     void on_button_pressed ();
 private:
     unique_ptr<impl_drag_widget> imp;
+    QString status_;
 };
 
 

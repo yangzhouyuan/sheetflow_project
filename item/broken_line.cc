@@ -1,7 +1,12 @@
 ﻿#include "broken_line.h"
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
+//<<<<<<< HEAD
 ///连线2
+//=======
+#include <QDebug>
+
+//>>>>>>> spong2
 std::unique_ptr<broken_line> broken_line::make(QVector<QPointF> points)
 {
     auto ret = std::unique_ptr<broken_line> (new broken_line (points));
@@ -28,13 +33,15 @@ void broken_line::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 {
     item::paint(painter, option, widget);
 
+    const QColor color = option->state bitand QStyle::State_Selected ? selected_color() : Qt::black;
     auto the_pen = painter->pen();
     the_pen.setWidthF(0.01 * item_width_);
+    the_pen.setColor(color);
     painter->setPen(the_pen);
 
-    painter->drawPolyline(return_points());
+    painter->drawPolyline(points_);
 
-    if (option->state & QStyle::State_Selected)
+    if (option->state bitand QStyle::State_Selected)
     {
         the_pen.setBrush(Qt::transparent);
         the_pen.setStyle(Qt::DashLine);
@@ -45,9 +52,16 @@ void broken_line::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
-QVector<QPointF> broken_line::return_points()
+QPainterPath broken_line::shape() const
 {
-    return points_;
+    QPainterPath path;
+
+    for (auto & it : points_)
+    {
+        path.lineTo(it);
+    }
+
+    return path;
 }
 
 
