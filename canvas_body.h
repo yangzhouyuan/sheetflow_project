@@ -25,7 +25,7 @@ private:
         return ret;
     }
 private:
-    unique_ptr<canvas_scene> scene_ = canvas_scene::make (QRectF{0, 0, 600, 500});
+    unique_ptr<canvas_scene> scene_ = canvas_scene::make (QRectF{0, 0, 1500, 1200});
 };
 
 
