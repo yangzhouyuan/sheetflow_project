@@ -14,9 +14,9 @@ unique_ptr<machining> machining::make(QPointF pos, QColor color)
 
     ret->setPos(pos);
     ret->type_ = "加工";
-    ret->set_attribute("序号");
-    ret->set_attribute("名称");
-    ret->set_attribute("设备");
+    ret->set_attribute("序号","123");
+    ret->set_attribute("名称","345");
+   ret->set_attribute("设备");
     return ret;
 }
 

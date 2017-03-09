@@ -12,10 +12,10 @@ unique_ptr<checkout> checkout::make(QPointF pos, QColor color)
         return nullptr;
     }
     ret->setPos(pos);
-    ret->type_ = "加工";
-    ret->set_attribute("序号");
-    ret->set_attribute("名称");
-    ret->set_attribute("设备");
+    ret->type_ = "检验";
+    ret->set_attribute("序号","345");
+    ret->set_attribute("名称","567");
+    ret->set_attribute("设备","789");
     return ret;
 }
 

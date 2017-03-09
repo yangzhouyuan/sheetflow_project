@@ -1,23 +1,6 @@
 ﻿#include "finished_product.h"
 #include <QInputDialog>
 #include <QPainter>
-//<<<<<<< HEAD
-//产成品
-//unique_ptr<finished_product> finished_product::make(QPointF pos, QColor color)
-//{
-//    Q_UNUSED(color);
-//    unique_ptr <finished_product> ret(new finished_product);
-//    ret->setPos(pos);
-//    ret->type_ = "产成品";
-//    ret->set_attribute("名称");
-//    ret->set_attribute("数量");
-//    ret->set_attribute("型号");
-//    return ret;
-//}
-
-//finished_product::finished_product(item *parent)
-//    :item(parent)
-//=======
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QFocusEvent>

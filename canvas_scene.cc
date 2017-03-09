@@ -44,13 +44,21 @@ void canvas_scene::item_seleted()
 
 QMap<QString, QString> canvas_scene::attribute_map()
 {
-    QMap<QString, QString> map_;
-    map_.insert("echo","echo");
-    map_.insert("123","345");
-    map_.insert("234","333");
-    map_.insert("xixi","x");
+    auto selected = selectedItems();
+    if (selected.size() != 1)
+    {
+        return {};
+    }
 
-    return map_;
+    auto item_selected = dynamic_cast<item*> (selected [0]);
+
+    if (item_selected == nullptr)
+    {
+        return {};
+    }
+
+    return item_selected->return_attriute();
+
 }
 
 canvas_scene::~canvas_scene()
