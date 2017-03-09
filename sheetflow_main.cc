@@ -93,6 +93,7 @@ void sheetflow_main::file_new()
 void sheetflow_main::connections()
 {
     connect( imp->action_file_new, &QAction::triggered, this, &sheetflow_main::file_new);
+    connect(imp->action_draw, &QAction::triggered, this, &sheetflow_main::set_draw_display);
 }
 
 void sheetflow_main::create_actions()
@@ -202,6 +203,22 @@ void sheetflow_main::set_attribute_window()
      {
          imp->attribute_->isHidden();
      }
+
+
+}
+
+void sheetflow_main::set_draw_display()
+{
+    if (imp->drawer_->isHidden())
+    {
+        imp->drawer_->show ();
+
+    }
+    else
+    {
+          imp->drawer_->hide ();
+
+    }
 
 
 }

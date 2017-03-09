@@ -37,6 +37,7 @@ private:
     canvas_view* actvite_body ();
     void set_attribute ();
     void set_attribute_window ();
+    void set_draw_display ();
 private:
     unique_ptr<impl_sheetflow_main> imp;
 
