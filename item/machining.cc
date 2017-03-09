@@ -5,7 +5,13 @@
 
 unique_ptr<machining> machining::make(QPointF pos, QColor color)
 {
-    unique_ptr <machining> ret(new machining);
+    Q_UNUSED(color);
+    auto ret = unique_ptr <machining>(new machining);
+    if (ret == nullptr or !ret->init())
+    {
+        return nullptr;
+    }
+
     ret->setPos(pos);
     ret->type_ = "加工";
     return ret;
@@ -16,6 +22,11 @@ machining::machining(item *parent)
 {
     item_width_ /= narrow_object_ratio_;
     item_height_ /= narrow_object_ratio_;
+}
+
+bool machining::init()
+{
+    return true;
 }
 
 void machining::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -50,6 +61,8 @@ void machining::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 void machining::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
+    item::mouseDoubleClickEvent(event);
+
     QInputDialog dlg;
     dlg.setInputMode (QInputDialog::IntInput);
     dlg.setLabelText("序号");

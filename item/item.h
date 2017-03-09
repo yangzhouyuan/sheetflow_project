@@ -14,7 +14,7 @@ public:
      QRectF boundingRect () const override;
      void paint (QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) override;
 protected:
-    explicit item(QGraphicsItem *parent = 0);
+    explicit item(QGraphicsItem *parent = nullptr);
 protected:
     qreal item_width_ = 100;
     qreal item_height_ = 0.8 * item_width_;

@@ -11,7 +11,7 @@ protected:
     bool init ();
 
     void mouseDoubleClickEvent (QGraphicsSceneMouseEvent* event) override;
-    void focusOutEvent (QFocusEvent* event);
+    void focusOutEvent (QFocusEvent* event) override;
 };
 
 

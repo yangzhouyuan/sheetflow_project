@@ -10,6 +10,7 @@ item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);
+    Q_UNUSED(option);
     painter->setPen(Qt::black);
 }
 

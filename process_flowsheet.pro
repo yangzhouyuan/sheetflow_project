@@ -19,7 +19,6 @@ SOURCES += main.cc\
     drag_widget.cc \
     drag_pixmap.cc \
     canvas_scene.cc \
-    draw.cc \
     item/item.cc \
     canvas_view.cc \
     item/machining.cc \
@@ -35,7 +34,6 @@ HEADERS  += sheetflow_main.h \
     drag_widget.h \
     drag_pixmap.h \
     canvas_scene.h \
-    draw.h \
     item/item.h \
     canvas_view.h \
     item/machining.h \

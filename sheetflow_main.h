@@ -6,6 +6,7 @@
 #include <QMdiArea>
 #include <QDockWidget>
 #include "drag_widget.h"
+
 using std::unique_ptr;
 
 namespace Ui {

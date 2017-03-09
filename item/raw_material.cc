@@ -17,14 +17,13 @@ raw_material::raw_material(QPointF point)
 {
     setPos (point);
     setFlags (ItemIsSelectable | ItemIsMovable);
-
 }
 
 
 
 bool raw_material::init()
 {
-    this->setPlainText("原材料");
+    this->setPlainText("双击输入原材料信息");
     return true;
 }
 

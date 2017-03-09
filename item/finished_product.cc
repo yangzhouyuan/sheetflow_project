@@ -14,14 +14,13 @@ unique_ptr<finished_product> finished_product::make(QPointF point)
         return nullptr;
     }
 
-    ret->setPos(point);
-
     return ret;
 }
 
 finished_product::finished_product(QPointF point)
 {
-    this->setPlainText("产成品");
+    setPos(point);
+    this->setPlainText("双击输入产成品信息");
 }
 
 bool finished_product::init()
