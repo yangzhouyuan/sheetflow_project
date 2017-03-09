@@ -28,9 +28,13 @@ private:
         return ret;
     }
 private:
+//<<<<<<< HEAD
 
     //canvas_scene canvas_scene_;
 
+//=======
+    //unique_ptr<canvas_scene> scene_ = canvas_scene::make (QRectF{0, 0, 1500, 1200});
+//>>>>>>> spong2
 };
 
 

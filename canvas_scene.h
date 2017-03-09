@@ -39,10 +39,16 @@ protected:
     void drawBackground(QPainter *painter, const QRectF &rect) override;
     void drawForeground(QPainter *painter, const QRectF &rect) override;
 private:
+//<<<<<<< HEAD
     void item_seleted();
 
 
 
+//=======
+    qreal height_ = 1000;
+    qreal width_ = 1000 * 1.4142135;
+    QRectF effective_rect_;
+//>>>>>>> spong2
 };
 
 
