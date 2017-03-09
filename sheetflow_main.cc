@@ -136,7 +136,6 @@ canvas_view* sheetflow_main::create_canvas_body()
 
 void sheetflow_main::notify_attribute(bool ok)
 {
-    qDebug() << "notify";
     imp->attribute_->setWidget(nullptr);
     if(!ok)
     {
@@ -148,16 +147,12 @@ void sheetflow_main::notify_attribute(bool ok)
         return;
     }
     auto attribute_map = activite_canvas->selete_item_data();///返回活动窗口里面item的属性
-    QMap <QString, QString>::const_iterator iter;
-    for(iter =attribute_map.cbegin();iter != attribute_map.cend();iter ++)
-    {
-        qDebug() << iter.key() + "::"+ "22" << "::" << iter.value() +":" + "22";
-    }
+
     if(attribute_map.size() == 0)
     {
         return;
     }
-   imp->attribute_content_ = attribute::make(attribute_map);//把获取到的数据传到属性类去创建widget
+   imp->attribute_content_ = attribute::make(std::move(attribute_map),this);//把获取到的数据传到属性类去创建widget
    set_attribute_window();
 }
 

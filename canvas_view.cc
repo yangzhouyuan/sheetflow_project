@@ -37,13 +37,7 @@ void canvas_view::set_type(canvas_view::draw_type t)
 
 QMap<QString, QString> canvas_view::selete_item_data()
 {
-    auto map = scene_->attribute_map();
-    QMap<QString, QString>::const_iterator iter;
-    for(iter = map.cbegin(); iter != map.cend(); ++iter)
-    {
 
-        qDebug() << iter.key() + "1" << ":" << iter.value() + "1";
-    }
    return scene_->attribute_map();
 }
 

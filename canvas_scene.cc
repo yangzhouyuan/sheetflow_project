@@ -49,11 +49,7 @@ QMap<QString, QString> canvas_scene::attribute_map()
     map_.insert("123","345");
     map_.insert("234","333");
     map_.insert("xixi","x");
-    QMap<QString, QString>::const_iterator iter ;
-    for (iter = map_.cbegin(); iter != map_.cend(); ++iter)
-    {
-        qDebug() << iter.key()<< ":" << iter.value();
-    }
+
     return map_;
 }
 

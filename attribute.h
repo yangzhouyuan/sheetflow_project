@@ -8,6 +8,7 @@
 #include <attribute.h>
 #include <QGridLayout>
 #include <QLabel>
+#include <QSpacerItem>
 
 class attribute : public QWidget
 {
@@ -24,8 +25,6 @@ public slots:
 
 private:
      QMap<QString, QString>item_data_;
-//     QGridLayout* layout = new QGridLayout(this);
-//     QLabel* label_ = new QLabel(this);
 };
 
 #endif // ATTRIBUTE_H
