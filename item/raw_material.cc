@@ -13,6 +13,24 @@ std::unique_ptr<raw_material> raw_material::make(QPointF point)
     return ret;
 }
 
+QMap<QString, QString> raw_material::return_attribute()
+{
+    return attribute_;
+}
+
+raw_material::raw_material(QGraphicsTextItem *parent)
+    :QGraphicsTextItem(parent)
+{
+
+}
+
+
+void raw_material::setattribute()
+{
+    attribute_.insert("名称","222");
+    attribute_.insert("规格","222");
+}
+
 raw_material::raw_material(QPointF point)
 {
     setPos (point);

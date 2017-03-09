@@ -88,6 +88,20 @@ void sheetflow_main::file_new()
     canva->show();
 }
 
+void sheetflow_main::receive()
+{
+    qDebug() << "receive";
+    auto active_canvas = this->actvite_body();
+    QMap<QString, QString> changes = imp->attribute_content_->apply();
+     QMap<QString, QString>::const_iterator iter;
+     for(iter = changes.cbegin();iter !=changes.cend();iter++)
+     {
+         qDebug() << "echo";
+         active_canvas->set_item_attribute(iter.key(),iter.value());
+     }
+
+}
+
 
 
 void sheetflow_main::connections()
@@ -195,6 +209,7 @@ void sheetflow_main::set_attribute()
 void sheetflow_main::set_attribute_window()
 {
      imp->attribute_->setWidget (imp->attribute_content_.get());
+     connect(imp->attribute_content_.get (), &attribute::commit, this, &sheetflow_main::receive);
      if (imp->attribute_->isHidden())
      {
          imp->attribute_->show();

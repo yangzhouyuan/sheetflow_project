@@ -2,6 +2,8 @@
 #include <QGraphicsObject>
 #include <memory>
 #include <QMap>
+#include "finished_product.h"
+#include "raw_material.h"
 
 using std::unique_ptr;
 using std::make_unique;
@@ -18,6 +20,7 @@ public:
      //explicit item(QGraphicsItem *parent = 0);
      QMap<QString, QString> return_attriute();
      const QColor &  selected_color () { return  selected_color_ ; }
+     void make_attribute();
 protected:
 
     explicit item(QGraphicsItem *parent = nullptr);
@@ -31,6 +34,9 @@ protected:
 
 private:
     QMap<QString, QString> attribute_map;
+    finished_product finish_;
+    raw_material raw_;
+
 
 
 

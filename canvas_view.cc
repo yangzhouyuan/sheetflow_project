@@ -60,7 +60,13 @@ void canvas_view::set_type(canvas_view::draw_type t)
 QMap<QString, QString> canvas_view::selete_item_data()
 {
 
-   return scene_->attribute_map();
+    return scene_->attribute_map();
+}
+
+void canvas_view::set_item_attribute(QString key, QString value)
+{
+    scene_->set_attribute(key,value);
+
 }
 
 //QPixmap canvas_view::pixmap()

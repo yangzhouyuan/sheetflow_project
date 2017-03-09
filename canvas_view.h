@@ -33,6 +33,7 @@ public:
     void set_type_string (const QString & type);
     void set_type (draw_type t);
     QMap<QString, QString> selete_item_data();
+    void set_item_attribute (QString key,QString value);
 //    QPixmap pixmap ();
 public:
     static unique_ptr<canvas_view> make (QWidget *parent = nullptr) { return make_helper (parent); }

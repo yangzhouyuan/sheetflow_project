@@ -1,6 +1,7 @@
 ﻿#include "item/item.h"
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QDebug>
 
 item::item(QGraphicsItem *parent) : QGraphicsObject (parent)
 {
@@ -12,6 +13,10 @@ QMap<QString, QString> item::return_attriute()
     return attribute_map;
 }
 
+//void item::make_attribute()
+//{
+//   auto map = finish_->return_attribute_map();
+//}
 void item::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(widget);

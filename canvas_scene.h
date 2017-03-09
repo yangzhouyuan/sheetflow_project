@@ -27,6 +27,7 @@ public:
     template<typename ... ARGS>
     canvas_scene (ARGS && ... args) : QGraphicsScene (std::forward<ARGS> (args)...) {}
     QMap<QString, QString>attribute_map();
+    void set_attribute (QString,QString);
 signals:
    void selete_change(bool);
 

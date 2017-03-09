@@ -7,14 +7,32 @@
 
 unique_ptr<finished_product> finished_product::make(QPointF point)
 {
-    auto ret = unique_ptr <finished_product> (new finished_product(point));
 
+    auto ret = unique_ptr <finished_product> (new finished_product(point));
     if (ret == nullptr or !ret->init())
     {
         return nullptr;
     }
 
     return ret;
+}
+
+void finished_product::set_attribute()
+{
+  attribute_.insert("名称", "111");
+  attribute_.insert("数量","111");
+  attribute_.insert("型号","111");
+}
+
+QMap<QString, QString> finished_product::return_attribute_map()
+{
+    return attribute_;
+}
+
+finished_product::finished_product(QGraphicsTextItem *parent)
+    :QGraphicsTextItem(parent)
+{
+    set_attribute();
 }
 
 finished_product::finished_product(QPointF point)
@@ -26,6 +44,7 @@ finished_product::finished_product(QPointF point)
 
 bool finished_product::init()
 {
+
     setFlags(ItemIsMovable | ItemIsSelectable);
     return true;
 }

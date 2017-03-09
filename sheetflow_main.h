@@ -22,6 +22,7 @@ public:
     ~sheetflow_main();
     static unique_ptr<sheetflow_main> make ();
     void file_new ();
+    void receive ();
 protected:
     explicit sheetflow_main(QWidget *parent = 0);
     bool init ();

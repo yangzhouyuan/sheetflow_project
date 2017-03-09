@@ -61,6 +61,23 @@ QMap<QString, QString> canvas_scene::attribute_map()
 
 }
 
+void canvas_scene::set_attribute(QString key, QString value)
+{
+    auto selected = selectedItems();
+    if (selected.size () != 1)
+    {
+        return;
+    }
+    auto item_selected = dynamic_cast<item*> (selected [0]);
+    if (item_selected == nullptr)
+    {
+        return;
+    }
+    item_selected->set_attribute (key, value);
+    item_selected->update ();
+
+}
+
 canvas_scene::~canvas_scene()
 {
 }
